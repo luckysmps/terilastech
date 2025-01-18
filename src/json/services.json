@@ -1,0 +1,64 @@
+[
+  {
+    "title": "SEO Content Writing & Optimization Services",
+    "color": "#F2F0EA",
+    "image": "SEO.png",
+    "details": [
+      "SEO-Optimized blog writing",
+      "SEO strategies for content marketing",
+      "Web content creation to boost search rankings",
+      "Keyword research & content targeting",
+      "Content editing and quality assurance"
+    ]
+  },
+  {
+    "title": "Engineering Services: Data Management & App Development",
+    "color": "#D4E5F1",
+    "image": "ENG.png",
+    "details": [
+      "SQL & Redshift database management and optimization",
+      "Custom app development with HTML, CSS, JS, React, VB.NET,etc..",
+      "Low-code app solutions using PowerApps & Retool",
+      "Power BI & Tableau dashboards for business intelligence",
+      "Lakehouse architecture for scalable data management"
+    ]
+  },
+  {
+    "title": "Non-Voice BPO Services for Data Entry & Administration",
+    "color": "#F6D8D1",
+    "image": "BPO.png",
+    "details": [
+      "Data entry and document processing",
+      "Form filling and virtual assistant services",
+      "Image-to-text conversion (OCR) services",
+      "Back-office support and data management",
+      "Administrative outsourcing services"
+    ]
+  },
+  {
+    "title": "Automation Solutions & Workflow Optimization",
+    "color": "#E4F6E6",
+    "image": "Auto.png",
+    "details": [
+      "Power Automate workflow solutions",
+      "Python-based automation for business tasks",
+      "Excel VBA macro development for efficiency",
+      "Cross-platform automation tools and integration",
+      "Zoho CRM and automation integration",
+      "Databricks for unified analytics and big data processing"
+    ]
+  },
+  {
+    "title": "AI Support & Machine Learning Solutions",
+    "color": "#D1F5FF",
+    "image": "AIR.png",
+    "details": [
+      "AI-driven chatbots for customer support",
+      "Predictive analytics and data-driven insights",
+      "Custom Python AI models for business automation",
+      "Prompt creation and validation for AI models and chatbots",
+      "Labelbox data labeling and model training solutions",
+      "Labelbox SDK for custom data labeling workflows"
+    ]
+  }
+]

@@ -1,0 +1,83 @@
+.about-us-container {
+  display: flex;
+  height:auto ;
+  background-color: #f5f3ee;
+  border: 10px double black;
+
+
+}
+
+
+
+.leftiintro{
+  flex: 0 0 60%;  
+  text-align: left;
+  padding: 20px ;
+  line-height: 1.2;
+  text-align: justify;
+  
+}
+.intrologo{
+  flex: 0 0 40%;  
+
+}
+.intrologo img{
+ width: 500px;
+ height:500px;
+ margin: 10%;
+ border-radius: 100%;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1),
+              0 0 20px rgba(0, 0, 0, 0.8),
+              0 0 30px rgba(0, 0, 0, 0.1);
+
+}
+
+.about-us-introduction,.about-us-approach, .about-us-contact p {
+  text-align: justify;   
+  line-height: 1.8;       
+  font-size: 16px;       
+  color: #333;           
+  margin-bottom: 30px;  
+  font-family: 'Pacifico', cursive; 
+
+}
+.about-us-introduction p + p, 
+.about-us-approach p + p, 
+.about-us-contact p + p {
+  margin-top: 20px;
+}
+
+.introheading{
+  display: flex;
+}
+
+.c_naame{
+  font-family: "Broadway", sans-serif;
+}
+
+.teamskills p{
+  color: gray;
+  padding: 5px;
+
+}
+@media (max-width: 768px) {
+  .about-us-container {
+    flex-direction: column; 
+  }
+
+  .intrologo {
+    flex: 0 0 100%;
+    
+ }
+ .intrologo img{
+  width: 400px;
+  height:400px;
+  margin: 10%;
+  border-radius: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1),
+               0 0 20px rgba(0, 0, 0, 0.8),
+               0 0 30px rgba(0, 0, 0, 0.1);
+ 
+ }
+
+}

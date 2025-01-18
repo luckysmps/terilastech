@@ -1,0 +1,36 @@
+body {
+  height: auto;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: linear-gradient(45deg, #2E3192 , #1BFFFF); 
+  margin-top: 150px;
+}
+
+.body-content {
+  display: flex;
+}
+.main-content {
+  flex: 0 0 80%;  
+  padding: 20px;
+  
+}
+
+.side-content {
+  flex: 0 0 20%; 
+
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .body-content {
+    flex-direction: column; 
+  }
+
+  .side-content {
+    flex: 0 0 100%;
+    margin-left: 5%; 
+ }
+
+
+}
