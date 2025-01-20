@@ -1,23 +1,9 @@
 import React from 'react';
 import '../assets/styles/trls_about.css';
+import skills from '../json/skills.json'
 import Terilasteahlog from '../assets/images/logo.png'
 const Trls_About = () => {
-  const skills = [
-    "Excel", "Excel Formulas", "Excel VBA", "Python Coding", "Automation", "VB.NET", "HTML", "CSS", "JavaScript",
-    "React.js", "Node.js", "Express.js", "GraphQL", "Power Apps", "Power Automate", "Power BI", "Tableau", 
-    "Zoho", "Retool", "SQL", "MySQL", "Redshift", "Lakehouse", "Databricks", "Labelbox", 
-    "Prompt Validation", "UX/UI Design", "QA Test", "Quality Check", "Cloud Services", "EC2",
-    "SEO Auditing", "Google Analytics", "Google Search Console", "Content Management Systems (CMS)", "Content Strategy", 
-    "Link Building", "On-Page SEO", "Off-Page SEO", "Technical SEO", "App Development", "Native & Hybrid Apps", 
-    "RESTful APIs", "Docker", "Kubernetes", "AWS Lambda", "Microservices Architecture", "CI/CD", 
-    "Cloud-native Development", "Data Warehousing", "Big Data Technologies", "Apache Hadoop", "Apache Spark", 
-    "Document Scanning and Indexing", "Data Annotation", "Data Entry Automation", "Robotic Process Automation (RPA)", 
-    "CRM Tools", "Data Migration", "Data Scraping", "UiPath", "Automation Anywhere", "Jenkins", 
-    "PowerShell Scripting", "Bash/Shell Scripting", "Zapier Integrations", "TensorFlow", "PyTorch", 
-    "Keras", "Natural Language Processing (NLP)", "Computer Vision", "Deep Learning", "Data Preprocessing", 
-    "Data Labeling", "Reinforcement Learning", "AI Chatbot Development", "Model Deployment", 
-    "Data-driven Insights", "Predictive Analytics"
-  ];
+ 
 
   return (
     <div>

@@ -4,6 +4,7 @@ import logo from '../assets/images/logo_symbol.png'
 
 const Trls_Header = ({handleNavigation}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState('home');
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -11,7 +12,9 @@ const Trls_Header = ({handleNavigation}) => {
 
   const handleClick  = (e, page) => {
     e.preventDefault(); 
-    handleNavigation(page); 
+    handleNavigation(page);
+    setSelectedItem(page);
+    setIsMenuOpen(!isMenuOpen);
   }
 
 
@@ -26,10 +29,10 @@ const Trls_Header = ({handleNavigation}) => {
       </div>
       <nav className={`nav ${isMenuOpen ? 'active' : ''}`}>
         <ul>
-          <li><a href="#home" onClick={(e) => handleClick (e, 'home')}>Home</a></li>
-          <li><a href="#ai_hub" onClick={(e) => handleClick (e, 'ai_hub')}>AI Hub</a></li>
-          <li><a href="#about" onClick={(e) => handleClick (e, 'about')}>About</a></li>
-          <li><a href="#contact" onClick={(e) => handleClick (e, 'contact')}>Contact</a></li>
+          <li><a href="#home" onClick={(e) => handleClick (e, 'home')} className={selectedItem === 'home' ? 'selected' : ''}>Home</a></li>
+          <li><a href="#ai_hub" onClick={(e) => handleClick (e, 'ai_hub')} className={selectedItem === 'ai_hub' ? 'selected' : ''}>AI Hub</a></li>
+          <li><a href="#about" onClick={(e) => handleClick (e, 'about')} className={selectedItem === 'about' ? 'selected' : ''}> About</a></li>
+          <li><a href="#contact" onClick={(e) => handleClick (e, 'contact')} className={selectedItem === 'contact' ? 'selected' : ''}>Contact</a></li>
         </ul>
       </nav>
       <div className="hamburger" onClick={toggleMenu}>

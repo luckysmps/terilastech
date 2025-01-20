@@ -1,7 +1,17 @@
 import React from 'react';
-
+import PageCreation from './Trls_PageCreation';
 const Trls_Contact = () => {
-  return <div><h2>Contact Us</h2></div>;
+ 
+
+  return (
+    <div>
+<div>
+     
+    </div>
+    <PageCreation />
+   
+    </div>
+  )
 };
 
 export default Trls_Contact;

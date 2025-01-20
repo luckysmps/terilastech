@@ -82,6 +82,10 @@
     font-size: 20px;
   }
   
+  .nav ul li a.selected {
+   border-bottom: 5px solid #90AEAD;
+  }
+
   .nav ul li a:hover {
     background-color: #90AEAD;
     border-radius: 20px;

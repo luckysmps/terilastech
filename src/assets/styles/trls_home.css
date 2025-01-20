@@ -9,12 +9,14 @@
   display: flex;
   flex-wrap: wrap ;
   gap: 0px;
+
 }
 
 .corevalues{
   display: flex;
   text-align: center;
   margin-top: 20px;
+
 }
 
 .corevalues h1{ 
@@ -35,7 +37,7 @@
 
 
 .home_card-content {
-  width: 80%;
+  width: 95%;
   display: flex;
   flex-direction: column;
   border-radius: 25px;
