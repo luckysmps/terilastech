@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import '../assets/styles/trls_control.css'
-const TextboxText = ({
+const CheckList = ({
   disName_lb,
   bgColor_lb,
   textColor_lb,
@@ -10,13 +10,7 @@ const TextboxText = ({
   isBold_lb,
   isItalic_lb,
   isUnderlined_lb,
-  bgColor,
-  textColor,
-  fontFamily,
-  fontSize,
-  isBold,
-  isItalic,
-  isUnderlined,
+
   
 }) => {
   // Combine the label styles and the textbox styles
@@ -30,40 +24,35 @@ const TextboxText = ({
     textDecoration: isUnderlined_lb ? 'underline' : 'none',
   };
 
-  const textboxStyles = {
-    color: textColor,
-    backgroundColor: bgColor,
-    fontFamily: fontFamily,
-    fontSize: fontSize,
-    fontWeight: isBold ? 'bold' : 'normal',
-    fontStyle: isItalic ? 'italic' : 'normal',
-    textDecoration: isUnderlined ? 'underline' : 'none',
-  };
+  const [ckStatus, setCkStatus]=useState(false)
 
-  const [ipLen, setIpLen]=useState('')
-
-  const lengthvalidation =(e)=>{
-    setIpLen(e.target.value)
+ 
+  const checkStatus =(e)=>{
+    setCkStatus(e.target.checked)
+    
   }
   
+  const chkstyle={
+    height:"30px",
+    width:"30px",
+    marginLeft:"20px"
+  }
   return (
-    <div className='input-container'>
+    <div className='input-container-cb'>
 
-      <label style={labelStyles}>{disName_lb}</label>
-      <div className='valueclass'>
-      <input
-        type="text"
-        style={textboxStyles}
-        onChange={lengthvalidation}
-     />
-        {ipLen.length < 3 && <div className='asterisk'>*</div>}
-        </div>
+      <label style={{...labelStyles, padding:"10px"}} >{disName_lb}</label>
+      <div className='valueclass-cb'>
+      <input type="checkbox" 
+       style={chkstyle}
+       checked={ckStatus}
+       onChange= {checkStatus} />
+       </div>
       
     </div>
   );
 };
 
-TextboxText.propTypes = {
+CheckList.propTypes = {
   disName_lb: PropTypes.string.isRequired,
   bgColor_lb: PropTypes.string.isRequired,
   textColor_lb: PropTypes.string.isRequired,
@@ -81,4 +70,4 @@ TextboxText.propTypes = {
   isUnderlined: PropTypes.bool.isRequired,
 };
 
-export default TextboxText;
+export default CheckList;

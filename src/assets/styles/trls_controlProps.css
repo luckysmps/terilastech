@@ -3,6 +3,8 @@
     flex-direction: column;
     width: 80%;
     background-color:#CBDCEB;
+    margin-bottom: 10px ;
+    margin-top: 20px;
     margin-right: 2px;
     padding: 2px;
     border: 2px solid black;
@@ -11,9 +13,23 @@
     overflow-y: hidden;
     transition: height 2s ease; 
 }
-.properties-panel:hover {
-    height: auto; 
-  }
+
+.properties-panel.collapsed {
+  height: 50;
+}
+
+.properties-panel.expanded {
+  height: auto;
+}
+
+
+.propsbtn button{
+  height: 20px;
+  width: 70px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
 .proptype{
     display: flex;
     align-items: center;

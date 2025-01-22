@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import '../assets/styles/trls_control.css'
-const TextboxText = ({
+import '../assets/styles/trls_control.css';
+
+const SelectOption = ({
   disName_lb,
   bgColor_lb,
   textColor_lb,
@@ -17,9 +18,9 @@ const TextboxText = ({
   isBold,
   isItalic,
   isUnderlined,
-  
+  options, // Semicolon-separated options
 }) => {
-  // Combine the label styles and the textbox styles
+
   const labelStyles = {
     color: textColor_lb,
     backgroundColor: bgColor_lb,
@@ -28,6 +29,7 @@ const TextboxText = ({
     fontWeight: isBold_lb ? 'bold' : 'normal',
     fontStyle: isItalic_lb ? 'italic' : 'normal',
     textDecoration: isUnderlined_lb ? 'underline' : 'none',
+
   };
 
   const textboxStyles = {
@@ -38,32 +40,49 @@ const TextboxText = ({
     fontWeight: isBold ? 'bold' : 'normal',
     fontStyle: isItalic ? 'italic' : 'normal',
     textDecoration: isUnderlined ? 'underline' : 'none',
+
   };
 
-  const [ipLen, setIpLen]=useState('')
+  const [selectedOption, setSelectedOption] = useState('0');
 
-  const lengthvalidation =(e)=>{
-    setIpLen(e.target.value)
-  }
-  
+  const handleDropdownChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
+
+  console.log('Received options in SelectOption:', options);
+
+  // Split the semicolon-separated options string into an array
+  const optionArray =  (options || '').split(';').map((option, index) => ({
+    label: option,
+    value: `${index + 1}`, // Using the index + 1 as the value for each option
+  }));
+
   return (
-    <div className='input-container'>
-
+    <div className="input-container">
       <label style={labelStyles}>{disName_lb}</label>
-      <div className='valueclass'>
-      <input
-        type="text"
-        style={textboxStyles}
-        onChange={lengthvalidation}
-     />
-        {ipLen.length < 3 && <div className='asterisk'>*</div>}
-        </div>
-      
+      <div className="valueclass">
+        <select
+          value={selectedOption}
+          onChange={handleDropdownChange}
+          style={textboxStyles} 
+        >
+          <option value="0">Select</option>
+          {optionArray.map((option, index) => (
+
+            <option key={index} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        {/* Optional: Show an asterisk if the selected option is empty (invalid) */}
+        {selectedOption === '0' && <div className="asterisk">*</div>}
+      </div>
+
     </div>
   );
 };
 
-TextboxText.propTypes = {
+SelectOption.propTypes = {
   disName_lb: PropTypes.string.isRequired,
   bgColor_lb: PropTypes.string.isRequired,
   textColor_lb: PropTypes.string.isRequired,
@@ -79,6 +98,8 @@ TextboxText.propTypes = {
   isBold: PropTypes.bool.isRequired,
   isItalic: PropTypes.bool.isRequired,
   isUnderlined: PropTypes.bool.isRequired,
+  options: PropTypes.string.isRequired, // Semicolon-separated options
+  layout: PropTypes.oneOf(['vertical', 'horizontal']).isRequired, // Layout style ('vertical' or 'horizontal')
 };
 
-export default TextboxText;
+export default SelectOption;

@@ -3,11 +3,14 @@ import "../assets/styles/trls_pageCreation.css";
 import PropertiesComponent from './Trls_Properties';
 import TextboxText from './Trls_TextboxText'
 import PreviewPage from './Trls_PreviewPage';
+import TextboxNumber from './Trls_TextboxNumber';
+import TextboxMultiline from './Trls_TextboxMultiline';
+import CheckList from './Trls_CheckList'
+import SelectOption from './Trls_SelectOption';
 
 const PageCreation = () => {
   const [rows, setRows] = useState([{ id: 1, dropdownValue: 'Select', properties: {} }]);
   const [nextId, setNextId] = useState(2);
-  const [isPreview, setIsPreview] = useState(false);
   const handleAddRow = () => {
     const newRow = { id: nextId, dropdownValue: 'Select', properties: {} };
     setRows([...rows, newRow]);
@@ -28,58 +31,92 @@ const PageCreation = () => {
     ));
   };
 
-  const togglePreview = () => {
-    setIsPreview(!isPreview);
-  };
+
 
   return (
     <div className="gallery-mainpage">
+    
+    <div className="main-container">
+     
+              <div className="gallery-container">
+                {rows.map((row) => (
+                  <div key={row.id} className="gallery-row">
+                        <label>Select Control:</label>
+                        <select
+                          value={row.dropdownValue}
+                          onChange={(e) => handleDropdownChange(row.id, e.target.value)}
+                        >
+                          <option value="0">Select</option>
+                          <option value="1">SingleLine Text</option>
+                          <option value="2">Number</option>
+                          <option value="3">Multiline Text</option>
+                          <option value="4">Check Box</option>
+                          <option value="5">Select Choice</option>
+                        </select>
+          
+                        <div className="pgcactprops">Set Properties
+                          {(row.dropdownValue === '1' || row.dropdownValue === '2' || row.dropdownValue === '3') && (
+                            <PropertiesComponent
+                              label={row.dropdownValue}
+                              onChange={(properties) => handlePropertiesChange(row.id, properties)}
+                            />
+                          )}
+                          {row.dropdownValue === '4' && (
+                            <PropertiesComponent
+                              label={row.dropdownValue}
+                              onChange={(properties) => handlePropertiesChange(row.id, properties)}
+                            />
+                          )}
+                           {row.dropdownValue === '5' && (
+                            <PropertiesComponent
+                              label={row.dropdownValue}
+                              onChange={(properties) => handlePropertiesChange(row.id, properties)}
+                            />
+                          )}
+                        </div>
+          
+                        <div className="pgcactpreview">Control Preview
+                          {row.dropdownValue === '1' && row.properties && (
+                            <TextboxText {...row.properties} />
+                          )}
+                          {row.dropdownValue === '2' && row.properties && (
+                            <TextboxNumber {...row.properties} />
+                          )}
+                          {row.dropdownValue === '3' && row.properties && (
+                            <TextboxMultiline {...row.properties} />
+                          )}
+                          {row.dropdownValue === '4' && row.properties && (
+                            <CheckList {...row.properties} />
+                          )}
+                          {row.dropdownValue === '5' && row.properties && (
+                            <SelectOption {...row.properties} />
+                          )}
+                        </div>
+          
+                        <div className="pgcactcheck">Required?
 
-      <h3>Project Creation:</h3>
-      {isPreview ? (
-        <PreviewPage rows={rows} />
-      ) : (
-      <div className="gallery-container">
-        {rows.map((row) => (
-          <div key={row.id} className="gallery-row">
-            <label>Select Control:</label>
-            <select
-              value={row.dropdownValue}
-              onChange={(e) => handleDropdownChange(row.id, e.target.value)}
-            >
-              <option value="0">Select</option>
-              <option value="1">SingleLineText</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
-            </select>
-
-            <div className="pgcactprops">
-              {row.dropdownValue === '1' && (
-                <PropertiesComponent
-                  onChange={(properties) => handlePropertiesChange(row.id, properties)}
-                />
-              )}
-            </div>
-
-            <div className="pgcactpreview">
-              {row.dropdownValue === '1' && row.properties && (
-                <TextboxText {...row.properties} />
-              )}
-            </div>
-
-            <div className="pgcactcheck">Required?</div>
-            <div className="pgcactdelete">
-              <button onClick={() => handleRemoveRow(row.id)}>Remove</button>
-            </div>
-          </div>
-        ))}
+                        </div>
+                        <div className="pgcactdelete">
+                          <button onClick={() => handleRemoveRow(row.id)}>Remove</button>
+                        </div>
+                  </div>
+                ))}
+              </div>
+        {/* Add Row Button below gallery container */}
+        <div className="add-row-button">
+          <button onClick={handleAddRow}>Add New Parameter</button>
+        </div>
       </div>
-      )}
-      <div>
-      <button onClick={handleAddRow}>Add Row</button>
-      <button onClick={togglePreview}>{isPreview ? 'Back to Creation' : 'Go to Preview'}</button>
+  
+      {/* Preview Section */}
+      <div className="previewpage-container">
+        <div className="previewpage">
+         <PreviewPage rows={rows} />
+        </div>
+      </div>
     </div>
-  </div>
+
+  
   );
 };
 

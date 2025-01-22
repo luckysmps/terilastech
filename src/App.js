@@ -25,17 +25,22 @@ function App() {
         return <Home />;
     }
   };
+ /* const hasSideContent = selectedPage === 'about' || selectedPage === 'home'; */
+  
+  const hasSideContent = selectedPage === 'about';
 
   return (
-<div>
+    <div>
       <Header handleNavigation={handleNavigation} />
-      <div className="body-content">
+      <div className={`body-content ${hasSideContent ? 'with-side' : ''}`}>
         <div className="main-content">
           {renderPageContent()}  
         </div>
-        <div className="side-content">
-          <Projects />  
-        </div>
+        {hasSideContent && (
+          <div className="side-content">
+            <Projects />
+          </div>
+        )}
       </div>
     </div>
   );

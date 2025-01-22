@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import '../assets/styles/trls_control.css'
-const TextboxText = ({
+const TextboxNumber = ({
   disName_lb,
   bgColor_lb,
   textColor_lb,
@@ -43,7 +43,10 @@ const TextboxText = ({
   const [ipLen, setIpLen]=useState('')
 
   const lengthvalidation =(e)=>{
-    setIpLen(e.target.value)
+    let  v=e.target.value
+    v = v.replace(/[^0-9]/g, '');
+     setIpLen(v)
+     e.target.value=v
   }
   
   return (
@@ -52,18 +55,18 @@ const TextboxText = ({
       <label style={labelStyles}>{disName_lb}</label>
       <div className='valueclass'>
       <input
-        type="text"
+        type="tel"
         style={textboxStyles}
         onChange={lengthvalidation}
      />
-        {ipLen.length < 3 && <div className='asterisk'>*</div>}
+        {ipLen.length < 1 && <div className='asterisk'>*</div>}
         </div>
       
     </div>
   );
 };
 
-TextboxText.propTypes = {
+TextboxNumber.propTypes = {
   disName_lb: PropTypes.string.isRequired,
   bgColor_lb: PropTypes.string.isRequired,
   textColor_lb: PropTypes.string.isRequired,
@@ -81,4 +84,4 @@ TextboxText.propTypes = {
   isUnderlined: PropTypes.bool.isRequired,
 };
 
-export default TextboxText;
+export default TextboxNumber;

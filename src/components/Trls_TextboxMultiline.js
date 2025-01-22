@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import '../assets/styles/trls_control.css'
-const TextboxText = ({
+const TextboxMultiline = ({
   disName_lb,
   bgColor_lb,
   textColor_lb,
@@ -51,9 +51,9 @@ const TextboxText = ({
 
       <label style={labelStyles}>{disName_lb}</label>
       <div className='valueclass'>
-      <input
+      <textarea
         type="text"
-        style={textboxStyles}
+        style={{...textboxStyles, height:'100pX', width:'100%'}}
         onChange={lengthvalidation}
      />
         {ipLen.length < 3 && <div className='asterisk'>*</div>}
@@ -63,7 +63,7 @@ const TextboxText = ({
   );
 };
 
-TextboxText.propTypes = {
+TextboxMultiline.propTypes = {
   disName_lb: PropTypes.string.isRequired,
   bgColor_lb: PropTypes.string.isRequired,
   textColor_lb: PropTypes.string.isRequired,
@@ -81,4 +81,4 @@ TextboxText.propTypes = {
   isUnderlined: PropTypes.bool.isRequired,
 };
 
-export default TextboxText;
+export default TextboxMultiline;

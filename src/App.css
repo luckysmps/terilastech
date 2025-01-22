@@ -13,7 +13,7 @@ body {
   display: flex;
 }
 .main-content {
-  flex: 0 0 80%;  
+  flex: 0 0 100%;  
   padding: 20px;
   
 }
@@ -22,6 +22,14 @@ body {
   flex: 0 0 20%; 
 
   padding: 0;
+}
+
+.body-content.with-side .main-content {
+  flex: 0 0 80%;
+}
+
+.body-content.with-side .side-content {
+  flex: 0 0 20%;
 }
 
 @media (max-width: 768px) {
