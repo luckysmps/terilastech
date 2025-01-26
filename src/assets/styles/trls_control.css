@@ -3,16 +3,45 @@
     flex-direction: column;
     width: 100%;
     margin: 1%;
+    padding-top: 3px;
   }
+
+  .displyname{
+    display: grid;
+    grid-template-columns: 90% 5%;
+    gap: 10px;
+    margin: 0px;
+    padding: 0px;
+    align-items: center; 
+  }
+
+  .displynamelable {
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+    max-height: none; 
+    overflow: visible; 
+    word-wrap: break-word; 
+  }
+
+  
+.asterisk{
+  display: flex;
+  color: red;
+  height: 40px;
+  align-items: center;
+  justify-content: center; 
+  font-size: 30px;
+
+}
 
 .input-container-cb{
   display: flex;
+  flex-grow: 1;
   flex-direction: row;
+  width: 100%;
 
   }
-
-
-
 .valueclass label{
  font-family: Arial, Helvetica, sans-serif;
  font-size: 1.2em;
@@ -20,16 +49,16 @@
  color: black;
  padding-bottom: 5px;
  width: 90%;
+
 }
-
-
-
 
 .valueclass{
 display: flex;
 flex-direction: row;
+width: 100%;
 }
 
+  
 .valueclassml textarea{
     font-family:'Times New Roman', Times, serif;
     font-size: 1.2em;
@@ -45,25 +74,23 @@ flex-direction: row;
     color: black;
     height: 30px;
     width: 100%;
+    
 }
 
 .valueclass select{
+  flex-grow: 1;
+  width: 100%;
   font-family:'Times New Roman', Times, serif;
   font-size: 1.2em;
   font-weight: 500;
   color: black;
   height: 30px;
-  width: 100%;
-
+  
 }
 
-.asterisk {
-    color: red;
-    margin-left: 5px;
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
+
   
+
 
 .add-row-button button{
 background-color: gray;
@@ -83,4 +110,133 @@ font-weight: 600;
 .add-row-button button:hover{
 background-color: #3ded97;
 color: #000000;
+}
+
+.valueclassrb{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  align-items: center;
+  gap: 10px; 
+
+}
+.radiocheck input{
+  height: 20px;
+  width: 20px;
+  margin: 10px;
+}
+
+.radiocheck {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.valueclassss{
+  display: flex;
+  flex-direction: row;
+
+}
+
+.startlabel {
+  cursor: pointer;
+  font-size: 40px;
+  font-weight: bolder;
+  color: #818589;
+  margin-right: 3px;
+  padding: 5px;
+  
+  }
+
+  
+.startlabel.selected  {
+  color: #ffbf00;
+}
+
+.startlabel:hover {
+  color: #ffbf00;
+}
+
+.search-select-wrapper {
+ display: flex;
+ flex-direction: column;
+  width: 100%;
+  position: relative;
+}
+
+.search-select-wrapper input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  height: auto;
+}
+
+.search-select-wrapper select {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+  margin: 0;
+  max-height: 300px ;
+}
+
+.remove-item
+{
+  
+color: red;
+font-size: 18px;
+cursor: pointer;
+margin: 2px;
+font-weight:700;
+font-family: Arial, sans-serif;
+}
+
+
+.selecteditems{
+  display: flex;
+  max-width: 90%;
+  flex-wrap: wrap;
+}
+
+.selected-item {
+  margin-right: 5px;
+  border-bottom: 1px solid gray;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+.multiselectoptions{
+  display: flex;
+  flex-direction: column;
+  max-height: 100px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  word-break: break-all;
+
+}
+
+.multiselectoptions label{
+  display: flex;
+  margin: 5px;
+  font-family:'Times New Roman', Times, serif;
+  font-size: 1.2em;
+  cursor: pointer;
+  width: 80%;
+}
+
+
+.multiselectoptions label{
+  display: flex;
+  margin: 3px;
+  font-family:'Times New Roman', Times, serif;
+  font-size: 1.2em;
+  cursor: pointer;
+  width: 80%;
+}
+
+
+.multiselectoptions label:hover{
+  background-color: #818589;
 }

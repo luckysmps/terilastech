@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import '../assets/styles/trls_control.css';
 
-const SelectOption = ({
+const SelectChoice = ({
   disName_lb,
   bgColor_lb,
   textColor_lb,
@@ -44,9 +44,9 @@ const SelectOption = ({
     width: '100%',
   };
 
-  const [selectedOption, setSelectedOption] = useState('0');
+  const [selectedOption, setSelectedOption] = useState('');
 
-  const handleDropdownChange = (e) => {
+  const handleRadioChange = (e) => {
     setSelectedOption(e.target.value);
   };
 
@@ -63,32 +63,33 @@ const SelectOption = ({
         {disName_lb}
       </label>
       </div>
-        {isRequired && selectedOption === '0' && <div className="asterisk">*</div>}
+        {isRequired && selectedOption === '' && <div className="asterisk">*</div>}
 
     </div>
-      <div className="valueclass">
-        <select
-          value={selectedOption}
-          onChange={handleDropdownChange}
-          style={textboxStyles} 
-        >
-          {isRequired && <option value="0">Select</option>}:
-          {optionArray.map((option, index) => (
-
-            <option key={index} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-     
+      <div className="valueclassrb">
        
+        {optionArray.map((option) => (
+            <div key={option.value}>  
+                <label className='radiocheck' style={textboxStyles}>
+                      <input
+                      type="radio"
+                      value={option.value}
+                      checked={selectedOption === option.value}
+                      onChange={handleRadioChange}
+                      
+                    />
+                  {option.label}
+              </label>
+            </div>
+        ))}
+   
+        
       </div>
-
-    </div>
+      </div>
   );
 };
 
-SelectOption.propTypes = {
+SelectChoice.propTypes = {
   disName_lb: PropTypes.string,
   bgColor_lb: PropTypes.string,
   textColor_lb: PropTypes.string,
@@ -108,4 +109,4 @@ SelectOption.propTypes = {
   isRequired: PropTypes.bool, 
 };
 
-export default SelectOption;
+export default SelectChoice;

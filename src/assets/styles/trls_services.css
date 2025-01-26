@@ -1,10 +1,15 @@
-/* Container for the cards */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
 
 
 .services_services-container {
     display: flex;
     flex-wrap:wrap;
-    justify-content:flex-start;
+    justify-content:center;
     padding: 0px;
     gap: 30px;
 }

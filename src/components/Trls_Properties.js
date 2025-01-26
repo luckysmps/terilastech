@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef  } from 'react';
 import "../assets/styles/trls_controlProps.css"
 
-const PropertiesComponent = ({ onChange,label }) => {
+const PropertiesComponent = ({ onChange,label}) => {
+  const previousValuesRef = useRef({});
   const[tgStatus,setTgStatus]=useState(true)
   const [disName_lb, setDisName_lb] = useState('Display Name'); 
   const [bgColor_lb, setBgColor_lb] = useState(''); 
@@ -19,12 +20,34 @@ const [textColor, setTextColor] = useState('#000000');
   const [isBold, setIsBold] = useState(false);
   const [isItalic, setIsItalic] = useState(false);
   const [isUnderlined, setIsUnderlined] = useState(false);
-  const [options, setOptions] = useState('Option1;Option2;Option3');
 
+  const [isRequired, setIsRequired] = useState(true);
+
+  const controlLabels = {
+    '1': 'SingleLine Text',
+    '2': 'Number',
+    '3': 'Multiline Text',
+    '4': 'Check Box',
+    '5': 'Option',
+    '6': 'Choice',
+    '7': 'Star',
+    '8': 'Search Select',
+    '9': 'Multi Select',
+  };
+
+  const [options, setOptions] = useState(()=>{
+    if(controlLabels[label]==='Star'){
+      return '1;2;3;4;5'
+    }
+    else {
+    return 'Option1;Option2;Option3;Option4'
+  }});
+
+  
   useEffect(() => {
    
     if (typeof onChange === 'function') {
-      onChange({
+      const newValues = {
         disName_lb,
         bgColor_lb,
         textColor_lb,
@@ -33,7 +56,7 @@ const [textColor, setTextColor] = useState('#000000');
         isBold_lb,
         isItalic_lb,
         isUnderlined_lb,
-
+        
         bgColor,
         textColor,
         fontFamily,
@@ -41,12 +64,18 @@ const [textColor, setTextColor] = useState('#000000');
         isBold,
         isItalic,
         isUnderlined,
-        options
-        
-      });
+        options,
+        isRequired
+      };
+  
+      if (JSON.stringify(newValues) !== JSON.stringify(previousValuesRef.current)) {
+        onChange(newValues);
+        previousValuesRef.current=newValues
+      }
     }
-  }, [bgColor, textColor, fontFamily, fontSize, isBold, isItalic, isUnderlined,bgColor_lb, disName_lb,fontFamily_lb,
-    isBold_lb,isItalic_lb,fontSize_lb,isUnderlined_lb,textColor_lb,options,onChange]);
+  },
+      [bgColor, textColor, fontFamily, fontSize, isBold, isItalic, isUnderlined,bgColor_lb, disName_lb,fontFamily_lb,
+    isBold_lb,isItalic_lb,fontSize_lb,isUnderlined_lb,textColor_lb,options,isRequired,onChange]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -99,9 +128,13 @@ const [textColor, setTextColor] = useState('#000000');
         case 'isUnderlined_lb':
           setIsUnderlined_lb(updatedValue);
           break;
-          case 'opsList':
-            setOptions(updatedValue);
-            break;
+        case 'options':
+          setOptions(updatedValue);
+          break;
+        case 'isRequired':
+          setIsRequired(updatedValue);
+
+          break;
        default:
         break;
     }
@@ -111,13 +144,9 @@ const [textColor, setTextColor] = useState('#000000');
     setTgStatus(!tgStatus)
   }
 
-  const controlLabels = {
-    '1': 'SingleLine Text',
-    '2': 'Number',
-    '3': 'Multiline Text',
-    '4': 'Check Box',
-    '5': 'Choice',
-  };
+
+
+
   return (
     <div>
     <div className='propsbtn'>
@@ -138,14 +167,19 @@ const [textColor, setTextColor] = useState('#000000');
 
       </div>
 
+      {(controlLabels[label]==='Option'  || controlLabels[label]==='Choice' || controlLabels[label]==='Check Box' || 
+      controlLabels[label]==='Star'|| controlLabels[label]==='Search Select' || controlLabels[label]==='Multi Select') &&(
       <div className="proptype">
         <label>Options List:</label>
         <label>NA</label>
-         <textarea  name="opsList" value={options} onChange={handleChange} autoComplete='off'
+        <div style={{display:'flex',flexDirection:'column'}}>
+         <textarea  name="options" value={options} onChange={handleChange} autoComplete='off'
          cols='12'
          rows='5'
         />
-      </div>
+        <label style={{ fontSize: '8px', color:'blue' }}>Separate with a semicolumn (;)</label>
+        </div>
+      </div>)}
 
       <div className="proptype">
         <label>Background Color:</label>
@@ -158,6 +192,7 @@ const [textColor, setTextColor] = useState('#000000');
         <input type="text" name="textColor_lb" value={textColor_lb} onChange={handleChange} />
         <input type="text" name="textColor" value={textColor} onChange={handleChange} />
       </div>
+
       <div className="proptype">
         <label>Font Family:</label>
         <input type="text" name="fontFamily_lb" value={fontFamily_lb} onChange={handleChange} />
@@ -186,7 +221,15 @@ const [textColor, setTextColor] = useState('#000000');
 
         <input type="checkbox" name="isUnderlined" checked={isUnderlined} onChange={(e) => setIsUnderlined(e.target.checked)} />
       </div>
-     
+
+
+
+      <div className="proptype">
+        <label>Required?:</label>
+        <label>NA:</label>
+        <input type="checkbox" name="isRequired" checked={isRequired} onChange={(e) => setIsRequired(e.target.checked)} />
+      </div>
+      
     </div>
     </div>
   );

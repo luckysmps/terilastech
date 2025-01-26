@@ -17,7 +17,9 @@ const TextboxText = ({
   isBold,
   isItalic,
   isUnderlined,
-  
+  isRequired,
+  value, 
+  onChange, 
 }) => {
   // Combine the label styles and the textbox styles
   const labelStyles = {
@@ -44,19 +46,29 @@ const TextboxText = ({
 
   const lengthvalidation =(e)=>{
     setIpLen(e.target.value)
+    if (onChange) {
+      onChange(e.target.value); 
+    }
   }
   
   return (
     <div className='input-container'>
-
-      <label style={labelStyles}>{disName_lb}</label>
+    <div className='displyname'>
+      <div className='displynamelable'>
+      <label style={labelStyles}>
+        {disName_lb}
+      </label>
+      </div>
+      {isRequired && ipLen.length < 3 && <div className='asterisk'>*</div>}
+    </div>
       <div className='valueclass'>
       <input
         type="text"
         style={textboxStyles}
+        value={value}
         onChange={lengthvalidation}
      />
-        {ipLen.length < 3 && <div className='asterisk'>*</div>}
+        
         </div>
       
     </div>
@@ -64,21 +76,25 @@ const TextboxText = ({
 };
 
 TextboxText.propTypes = {
-  disName_lb: PropTypes.string.isRequired,
-  bgColor_lb: PropTypes.string.isRequired,
-  textColor_lb: PropTypes.string.isRequired,
-  fontFamily_lb: PropTypes.string.isRequired,
-  fontSize_lb: PropTypes.string.isRequired,
-  isBold_lb: PropTypes.bool.isRequired,
-  isItalic_lb: PropTypes.bool.isRequired,
-  isUnderlined_lb: PropTypes.bool.isRequired,
-  bgColor: PropTypes.string.isRequired,
-  textColor: PropTypes.string.isRequired,
-  fontFamily: PropTypes.string.isRequired,
-  fontSize: PropTypes.string.isRequired,
-  isBold: PropTypes.bool.isRequired,
-  isItalic: PropTypes.bool.isRequired,
-  isUnderlined: PropTypes.bool.isRequired,
+  disName_lb: PropTypes.string,
+  bgColor_lb: PropTypes.string,
+  textColor_lb: PropTypes.string,
+  fontFamily_lb: PropTypes.string,
+  fontSize_lb: PropTypes.string,
+  isBold_lb: PropTypes.bool,
+  isItalic_lb: PropTypes.bool,
+  isUnderlined_lb: PropTypes.bool,
+  bgColor: PropTypes.string,
+  textColor: PropTypes.string,
+  fontFamily: PropTypes.string,
+  fontSize: PropTypes.string,
+  isBold: PropTypes.bool,
+  isItalic: PropTypes.bool,
+  isUnderlined: PropTypes.bool,
+  options: PropTypes.string, 
+  isRequired: PropTypes.bool, 
+  value: PropTypes.string, 
+  onChange: PropTypes.func, 
 };
 
 export default TextboxText;

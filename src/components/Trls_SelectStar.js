@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import '../assets/styles/trls_control.css';
 
-const SelectOption = ({
+const SelectStar = ({
   disName_lb,
   bgColor_lb,
   textColor_lb,
@@ -44,17 +44,21 @@ const SelectOption = ({
     width: '100%',
   };
 
-  const [selectedOption, setSelectedOption] = useState('0');
-
-  const handleDropdownChange = (e) => {
-    setSelectedOption(e.target.value);
-  };
+  const [selectedOption, setSelectedOption] = useState(0);
 
   const optionArray =  (options || '').split(';').map((option, index) => ({
     label: option,
-    value: `${index + 1}`, // Using the index + 1 as the value for each option
+    value: `${index + 1}`,
   }));
 
+  const handleStarClick  = (value) => {
+    if (value === selectedOption) {
+      setSelectedOption(0); 
+    } else {
+      setSelectedOption(value);  
+    }
+
+  };
   return (
     <div className="input-container">
         <div className='displyname'>
@@ -63,32 +67,36 @@ const SelectOption = ({
         {disName_lb}
       </label>
       </div>
-        {isRequired && selectedOption === '0' && <div className="asterisk">*</div>}
+        {isRequired && selectedOption === 0 && <div className="asterisk">*</div>}
 
     </div>
-      <div className="valueclass">
-        <select
-          value={selectedOption}
-          onChange={handleDropdownChange}
-          style={textboxStyles} 
-        >
-          {isRequired && <option value="0">Select</option>}:
-          {optionArray.map((option, index) => (
-
-            <option key={index} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-     
+      <div className="valueclassss">
        
+        {optionArray.map((option) => (
+            <div key={option.value}>  
+                <label className='starselect' style={textboxStyles}>
+                      <input
+                      type="radio"
+                      value={option.value}
+                      onClick={() => handleStarClick(Number(option.value))}
+                      style={{display:"none"}}
+                    />
+                <span
+                className={`startlabel ${selectedOption >= Number(option.value) ? 'selected' : ''}`}
+                >
+                &#9733;
+              </span>
+              </label>
+            </div>
+        ))}
+   
+        
       </div>
-
-    </div>
+      </div>
   );
 };
 
-SelectOption.propTypes = {
+SelectStar.propTypes = {
   disName_lb: PropTypes.string,
   bgColor_lb: PropTypes.string,
   textColor_lb: PropTypes.string,
@@ -108,4 +116,4 @@ SelectOption.propTypes = {
   isRequired: PropTypes.bool, 
 };
 
-export default SelectOption;
+export default SelectStar;
