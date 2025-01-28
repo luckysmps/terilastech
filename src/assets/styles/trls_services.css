@@ -180,7 +180,9 @@
         width: 100%;
         flex-direction: column;
         justify-content: center;
-        margin: 20%;
+        margin: 0%;
+        padding: 0 20%;
+        flex-wrap: wrap;
     }
 }
 
@@ -190,10 +192,8 @@
         width: 100%;
         flex-direction: column;
         justify-content: center;
-        margin: 20%;
+        margin: 0%;
+        padding: 0 5%;
     }
-    .services_service-card {
-        width: 100%; /* Full width on smaller screens */
-        margin: 20%;
-    }
+
 }
