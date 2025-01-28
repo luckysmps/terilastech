@@ -5,7 +5,8 @@
   border: 10px double black;
   justify-content: center;
   align-items: center;
-
+  flex-wrap: wrap; 
+  overflow: hidden;
 }
 
 
@@ -20,9 +21,11 @@
 }
 .intrologo{
   flex: 0 0 25%; 
-  height: 80%;
+  max-width: 100%;
+  height: auto;
 }
 .intrologo img{
+
  width: 500px;
  height:500px;
  border-radius: 100%;
@@ -62,17 +65,22 @@
 }
 @media (max-width: 768px) {
   .about-us-container {
+    display: flex;
     flex-direction: column; 
+    justify-content: flex-start;
   }
-
-  .intrologo {
-    flex: 0 0 100%;
-    
- }
+  .leftiintro{
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
  .intrologo img{
-  width: 400px;
-  height:400px;
-  margin: 10%;
+  width: 100%;
+  height:auto;
+  max-width: 300px; 
+  max-height: 300px;
+  margin: 0%;
+  overflow: hidden;
   border-radius: 100%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1),
                0 0 20px rgba(0, 0, 0, 0.8),
