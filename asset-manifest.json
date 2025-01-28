@@ -1,16 +1,24 @@
 {
   "files": {
-    "main.css": "//luckysmps.github.io/terilastech/static/css/main.4ddbd632.css",
-    "main.js": "//luckysmps.github.io/terilastech/static/js/main.87352277.js",
-    "static/js/488.ddc36bf2.chunk.js": "//luckysmps.github.io/terilastech/static/js/488.ddc36bf2.chunk.js",
-    "static/media/delete.png": "//luckysmps.github.io/terilastech/static/media/delete.fa7b3f02c030a1906bca.png",
-    "index.html": "//luckysmps.github.io/terilastech/index.html",
-    "main.4ddbd632.css.map": "//luckysmps.github.io/terilastech/static/css/main.4ddbd632.css.map",
-    "main.87352277.js.map": "//luckysmps.github.io/terilastech/static/js/main.87352277.js.map",
-    "488.ddc36bf2.chunk.js.map": "//luckysmps.github.io/terilastech/static/js/488.ddc36bf2.chunk.js.map"
+    "main.css": "/terilastech/static/css/main.69cd1954.css",
+    "main.js": "/terilastech/static/js/main.5026f6ed.js",
+    "static/js/488.ddc36bf2.chunk.js": "/terilastech/static/js/488.ddc36bf2.chunk.js",
+    "static/media/logo.png": "/terilastech/static/media/logo.47b57b17a4e3e190af2d.png",
+    "static/media/ENG.png": "/terilastech/static/media/ENG.7309a1f2a0b3e9207fd6.png",
+    "static/media/1.png": "/terilastech/static/media/1.109f2fc5dc8aa6e103e4.png",
+    "static/media/AIR.png": "/terilastech/static/media/AIR.cfcce2d7aa2a386df566.png",
+    "static/media/SEO.png": "/terilastech/static/media/SEO.63b16cfd4a9e0a9ca3bf.png",
+    "static/media/logo_symbol.png": "/terilastech/static/media/logo_symbol.42e643e346f118354a13.png",
+    "static/media/Auto.png": "/terilastech/static/media/Auto.ef6ab66fb0dac128f333.png",
+    "static/media/BPO.png": "/terilastech/static/media/BPO.bcabe17de7a4e63625ed.png",
+    "static/media/delete.png": "/terilastech/static/media/delete.fa7b3f02c030a1906bca.png",
+    "index.html": "/terilastech/index.html",
+    "main.69cd1954.css.map": "/terilastech/static/css/main.69cd1954.css.map",
+    "main.5026f6ed.js.map": "/terilastech/static/js/main.5026f6ed.js.map",
+    "488.ddc36bf2.chunk.js.map": "/terilastech/static/js/488.ddc36bf2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4ddbd632.css",
-    "static/js/main.87352277.js"
+    "static/css/main.69cd1954.css",
+    "static/js/main.5026f6ed.js"
   ]
 }
