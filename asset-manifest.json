@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.f79cf2d2.css",
-    "main.js": "/static/js/main.9b6984b7.js",
-    "static/js/488.ddc36bf2.chunk.js": "/static/js/488.ddc36bf2.chunk.js",
-    "static/media/delete.png": "/static/media/delete.fa7b3f02c030a1906bca.png",
-    "index.html": "/index.html",
-    "main.f79cf2d2.css.map": "/static/css/main.f79cf2d2.css.map",
-    "main.9b6984b7.js.map": "/static/js/main.9b6984b7.js.map",
-    "488.ddc36bf2.chunk.js.map": "/static/js/488.ddc36bf2.chunk.js.map"
+    "main.css": "//luckysmps.github.io/terilastech/static/css/main.4ddbd632.css",
+    "main.js": "//luckysmps.github.io/terilastech/static/js/main.87352277.js",
+    "static/js/488.ddc36bf2.chunk.js": "//luckysmps.github.io/terilastech/static/js/488.ddc36bf2.chunk.js",
+    "static/media/delete.png": "//luckysmps.github.io/terilastech/static/media/delete.fa7b3f02c030a1906bca.png",
+    "index.html": "//luckysmps.github.io/terilastech/index.html",
+    "main.4ddbd632.css.map": "//luckysmps.github.io/terilastech/static/css/main.4ddbd632.css.map",
+    "main.87352277.js.map": "//luckysmps.github.io/terilastech/static/js/main.87352277.js.map",
+    "488.ddc36bf2.chunk.js.map": "//luckysmps.github.io/terilastech/static/js/488.ddc36bf2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f79cf2d2.css",
-    "static/js/main.9b6984b7.js"
+    "static/css/main.4ddbd632.css",
+    "static/js/main.87352277.js"
   ]
 }
