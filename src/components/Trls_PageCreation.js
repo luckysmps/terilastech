@@ -11,6 +11,7 @@ import SelectChoice from './Trls_SelectChoice';
 import SelectStar from './Trls_SelectStar';
 import SearchSelect from './Trls_SearchSelect';
 import MultiSelect from './Trls_MultiSelect';
+
 const PageCreation = () => {
   const [rows, setRows] = useState([{ id: 1, dropdownValue: 'Select', properties: {} }]);
   const [nextId, setNextId] = useState(2);
@@ -37,15 +38,13 @@ const PageCreation = () => {
 
   const handleCreate = () => {
     // Prepare the data in JSON format
-    console.log("Rows Data:", rows);
     const dataToSave = rows.map(row => ({
       id: row.id,
       controlType: row.dropdownValue,
       properties: row.properties,
     }));
 
-    // Display the generated JSON data in an alert
-    alert(JSON.stringify(dataToSave, null, 2)); // The `null, 2` makes the JSON more readable (pretty-print)
+    console.log(JSON.stringify(dataToSave, null, 2));
   };
 
 
@@ -169,15 +168,16 @@ const PageCreation = () => {
                 ))}
               </div>
         {/* Add Row Button below gallery container */}
+        <div className='buttonsdiv'>
         <div className="add-row-button">
           <button onClick={handleAddRow}>Add New Parameter</button>
         </div>
 
           {/* Create Button */}
           <div className="create-button">
-          <button onClick={handleCreate}>Create</button>
+          <button onClick={handleCreate}>Create Project</button>
         </div>
-   
+        </div>
       </div>
   
 

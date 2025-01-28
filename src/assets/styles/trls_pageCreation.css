@@ -45,8 +45,44 @@
     padding: 2px;
 
 }
+.buttonsdiv{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50%, 2fr)); 
+
+}
+
+.buttonsdiv .add-row-button{
+    display: grid;
+    justify-content: flex-start;
+    
+}
 
 
+.buttonsdiv .create-button{
+    display: grid;
+    justify-content: flex-end;
+    
+}
+.buttonsdiv  button{
+    background-color: gray;
+    color: white;
+    padding: 5px;
+    margin-top: 10px;
+    width: 200px;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 20px;
+    border:2px solid black;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    }  
+    
+    .buttonsdiv button:hover{
+    background-color: #3ded97;
+    color: #000000;
+    }
+    
   .main-container {
     display: flex;
     flex-direction: column;

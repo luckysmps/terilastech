@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect} from 'react';
 import TextboxText from './Trls_TextboxText';
 import TextboxNumber from './Trls_TextboxNumber';
 import TextboxMultiline from './Trls_TextboxMultiline';
@@ -32,14 +32,14 @@ const PreviewPage = ({ rows }) => {
 
     rows.forEach((row) => {
       const displayName = row.properties.disName_lb; 
-      const value = formData[displayName] || [] ||'';
+      const value = formData[displayName] || [];
       resetFormData[displayName] = value; 
     });
 
     alert(JSON.stringify(resetFormData, null, 2));
 
    setFormData({});
-   setResetFlag((prevKey) => prevKey +1);
+   setResetFlag(true);
   };
 
   const handleValidityChange = (displayName, isValid) => {
@@ -49,8 +49,18 @@ const PreviewPage = ({ rows }) => {
     }));
   };
 
+  useEffect(() => {
+    if (resetFlag) {
+      // Reset flag back to false after reset logic
+      setTimeout(() => {
+          setResetFlag(false);
+      }, 0); // Ensures it resets only after one render cycle
+    }
+  }, [resetFlag]);
+
   // Check if all required fields are valid
   const isSubmitDisabled = Object.values(validFields).includes(false);
+
    return (
     <div className="preview-page">
       <div className="preview-container">

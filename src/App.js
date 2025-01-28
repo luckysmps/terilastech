@@ -1,8 +1,11 @@
 import React,{useState} from "react";
 import './App.css'; 
+/*
 import Header from "./components/Trls_Header";
+
 import Home from "./components/Trls_Services"
-import About from "./components/Trls_About"
+import About from "./components/Trls_About"*/
+import HeaderTest from "./components/Trls_Header-test";
 import Contact from "./components/Trls_Contact"
 import Projects from "./components/Trls_Home"
 
@@ -16,13 +19,13 @@ function App() {
   const renderPageContent = () => {
     switch (selectedPage) {
       case 'home':
-        return <Home />;
+        return <Contact />;
       case 'about':
-        return <About />;
-      case 'contact':
+        return <Contact />;
+      case 'TaskApp':
         return <Contact />;
       default:
-        return <Home />;
+        return <Contact />;
     }
   };
  /* const hasSideContent = selectedPage === 'about' || selectedPage === 'home'; */
@@ -31,7 +34,7 @@ function App() {
 
   return (
     <div>
-      <Header handleNavigation={handleNavigation} />
+      <HeaderTest handleNavigation={handleNavigation} />
       <div className={`body-content ${hasSideContent ? 'with-side' : ''}`}>
         <div className="main-content">
           {renderPageContent()}  
