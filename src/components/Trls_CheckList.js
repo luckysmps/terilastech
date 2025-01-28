@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect} from 'react';
 import PropTypes from 'prop-types';
-import '../assets/styles/trls_control.css'
+import '../assets/styles/trls_control.css';
+
 const CheckList = ({
   disName_lb,
   bgColor_lb,
@@ -19,7 +20,10 @@ const CheckList = ({
   isUnderlined,
   options,
   isRequired,
-  
+  value, 
+  onChange, 
+  reset,
+  onValidityChange,
 }) => {
 
   const labelStyles = {
@@ -30,7 +34,6 @@ const CheckList = ({
     fontWeight: isBold_lb ? 'bold' : 'normal',
     fontStyle: isItalic_lb ? 'italic' : 'normal',
     textDecoration: isUnderlined_lb ? 'underline' : 'none',
-
   };
 
   const textboxStyles = {
@@ -44,59 +47,76 @@ const CheckList = ({
     width: '100%',
   };
 
-  const [selectedOption, setSelectedOption] = useState('');
-
+  const [selectedOption, setSelectedOption] = useState([]);
+  const [isValid, setIsValid] = useState(true);
+  
   const handleCheckboxChange = (e) => {
     const value = e.target.value;
 
     setSelectedOption((prevSelectedOptions) => {
-      // Check if the value is already in the array
       if (prevSelectedOptions.includes(value)) {
-        // Remove the value if it's already selected
         return prevSelectedOptions.filter((option) => option !== value);
       } else {
-        // Add the value if it's not selected
         return [...prevSelectedOptions, value];
       }
     });
+
   };
 
-  const optionArray =  (options || '').split(';').map((option, index) => ({
+  const optionArray = (options || '').split(';').map((option, index) => ({
     label: option,
     value: `${index + 1}`, // Using the index + 1 as the value for each option
   }));
 
+  useEffect(() => {
+    if (onChange && selectedOption.join(';') !== value) {
+      onChange(selectedOption.join(';'));
+    }
+  }, [selectedOption, onChange, value]);
+  
+  const newIsValid = isRequired && selectedOption.length === 0 ? false : true;
+
+  useEffect(() => {
+    if (isValid !== newIsValid) {
+      setIsValid(newIsValid);
+      
+        onValidityChange?.(disName_lb, newIsValid);
+      }    
+  }, [ newIsValid, isValid, disName_lb, onValidityChange]);
+
+  useEffect(() => {
+    if (reset) {
+      setSelectedOption([]);
+    }
+  }, [reset]); // This will trigger when `reset` changes
+
   return (
     <div className="input-container">
-        <div className='displyname'>
-      <div className='displynamelable'>
-      <label style={labelStyles}>
-        {disName_lb}
-      </label>
+      <div className='displyname'>
+        <div className='displynamelable'>
+          <label style={labelStyles}>
+            {disName_lb}
+          </label>
+        </div>
+        {/* Updated check for required field: checking selectedOption.length */}
+        {isRequired && selectedOption.length === 0 && <div className="asterisk">*</div>}
       </div>
-        {isRequired && selectedOption === '' && <div className="asterisk">*</div>}
-
-    </div>
       <div className="valueclassrb">
-       
         {optionArray.map((option) => (
-            <div key={option.value}>  
-                <label className='radiocheck' style={textboxStyles}>
-                      <input
-                      type="checkbox"
-                      value={option.value}
-                      checked={selectedOption.includes(option.value)} 
-                      onChange={handleCheckboxChange}
-                      
-                    />
-                  {option.label}
-              </label>
-            </div>
+          <div key={option.value}>  
+            <label className='radiocheck' style={textboxStyles}>
+              <input
+                type="checkbox"
+                value={option.label}
+                checked={selectedOption.includes(option.label)} 
+                onChange={handleCheckboxChange}
+              />
+              {option.label}
+            </label>
+          </div>
         ))}
-   
-        
       </div>
-      </div>
+    </div>
   );
 };
 
@@ -118,5 +138,10 @@ CheckList.propTypes = {
   isUnderlined: PropTypes.bool,
   options: PropTypes.string, 
   isRequired: PropTypes.bool, 
+  value: PropTypes.string, 
+  onChange: PropTypes.func, 
+  reset: PropTypes.bool,
+  onValidityChange: PropTypes.func,
 };
+
 export default CheckList;

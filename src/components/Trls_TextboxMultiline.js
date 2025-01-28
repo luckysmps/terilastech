@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect  } from 'react';
 import PropTypes from 'prop-types';
 import '../assets/styles/trls_control.css'
 const TextboxMultiline = ({
@@ -20,6 +20,8 @@ const TextboxMultiline = ({
   isRequired,
   value, 
   onChange, 
+  reset,
+  onValidityChange,
 }) => {
   // Combine the label styles and the textbox styles
   const labelStyles = {
@@ -43,13 +45,29 @@ const TextboxMultiline = ({
   };
 
   const [ipLen, setIpLen]=useState('')
-
+  const [isValid, setIsValid] = useState(true);
   const lengthvalidation =(e)=>{
     setIpLen(e.target.value)
     if (onChange) {
       onChange(e.target.value); 
+      
     }
   }
+  
+  useEffect(() => {
+    setIpLen('');
+  }, [reset]);
+
+  const newIsValid = isRequired && ipLen.length < 3 ? false : true;
+
+  useEffect(() => {
+    if (isValid !== newIsValid) {
+      setIsValid(newIsValid);
+      if (onValidityChange) {
+        onValidityChange(disName_lb, newIsValid);
+      }
+    }
+  }, [ipLen, newIsValid, isValid, disName_lb, onValidityChange]);
   
   return (
     <div className='input-container'>
@@ -96,6 +114,8 @@ TextboxMultiline.propTypes = {
   isRequired: PropTypes.bool, 
   value: PropTypes.string, 
   onChange: PropTypes.func, 
+  reset: PropTypes.bool,
+  onValidityChange: PropTypes.func,
 };
 
 export default TextboxMultiline;

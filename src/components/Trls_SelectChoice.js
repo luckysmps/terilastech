@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect,useRef  } from 'react';
 import PropTypes from 'prop-types';
 import '../assets/styles/trls_control.css';
 
@@ -19,7 +19,11 @@ const SelectChoice = ({
   isItalic,
   isUnderlined,
   options,
-  isRequired
+  isRequired,
+  value, 
+  onChange, 
+  reset,
+  onValidityChange,
 }) => {
 
   const labelStyles = {
@@ -44,8 +48,9 @@ const SelectChoice = ({
     width: '100%',
   };
 
-  const [selectedOption, setSelectedOption] = useState('');
-
+  const [selectedOption, setSelectedOption] = useState(value || 0);
+  const [isValid, setIsValid] = useState(true);
+  const prevSelectedLabelRef = useRef('');
   const handleRadioChange = (e) => {
     setSelectedOption(e.target.value);
   };
@@ -55,6 +60,35 @@ const SelectChoice = ({
     value: `${index + 1}`, // Using the index + 1 as the value for each option
   }));
 
+  useEffect(() => {
+    const selectedLabel = optionArray.find(option => option.value === selectedOption)?.label || '';
+
+    // Only trigger onChange if the label has changed
+    if (onChange && selectedLabel  !== prevSelectedLabelRef.current) {
+      onChange(selectedLabel);
+    }
+
+    // Update the ref with the new selected label
+    prevSelectedLabelRef.current = selectedLabel;
+  }, [selectedOption, onChange, optionArray]);
+
+  const newIsValid = isRequired && selectedOption === 0 ? false : true;
+
+  useEffect(() => {
+    if (isValid !== newIsValid) {
+      setIsValid(newIsValid);
+      if (onValidityChange) {
+        onValidityChange(disName_lb, newIsValid);
+      }
+    }
+  }, [newIsValid, isValid, disName_lb, onValidityChange]);
+
+  useEffect(() => {
+    if (reset) {
+      setSelectedOption(0); // Reset to '0', not an empty array
+    }
+  }, [reset]); // This will trigger when `reset` changes
+  
   return (
     <div className="input-container">
         <div className='displyname'>
@@ -63,7 +97,7 @@ const SelectChoice = ({
         {disName_lb}
       </label>
       </div>
-        {isRequired && selectedOption === '' && <div className="asterisk">*</div>}
+        {isRequired && selectedOption === 0 && <div className="asterisk">*</div>}
 
     </div>
       <div className="valueclassrb">
@@ -107,6 +141,10 @@ SelectChoice.propTypes = {
   isUnderlined: PropTypes.bool,
   options: PropTypes.string, 
   isRequired: PropTypes.bool, 
+    value: PropTypes.string, 
+    onChange: PropTypes.func, 
+     reset: PropTypes.bool,
+      onValidityChange: PropTypes.func,
 };
 
 export default SelectChoice;

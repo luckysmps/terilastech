@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import PropTypes from 'prop-types';
 import '../assets/styles/trls_control.css'
 const TextboxNumber = ({
@@ -20,7 +20,8 @@ const TextboxNumber = ({
   isRequired,
   value, 
   onChange, 
-  
+  reset,
+  onValidityChange,
 }) => {
   // Combine the label styles and the textbox styles
   const labelStyles = {
@@ -44,7 +45,7 @@ const TextboxNumber = ({
   };
 
   const [ipLen, setIpLen]=useState('')
-
+  const [isValid, setIsValid] = useState(true);
   const lengthvalidation =(e)=>{
     let  v=e.target.value
     v = v.replace(/[^0-9]/g, '');
@@ -55,6 +56,21 @@ const TextboxNumber = ({
     }
   }
   
+  useEffect(() => {
+    setIpLen('');
+  }, [reset]);
+
+  const newIsValid = isRequired && ipLen.length < 1 ? false : true;
+
+  useEffect(() => {
+    if (isValid !== newIsValid) {
+      setIsValid(newIsValid);
+      if (onValidityChange) {
+        onValidityChange(disName_lb, newIsValid);
+      }
+    }
+  }, [ipLen, newIsValid, isValid, disName_lb, onValidityChange]);
+
   return (
     <div className='input-container'>
 
@@ -101,6 +117,8 @@ TextboxNumber.propTypes = {
   isRequired: PropTypes.bool, 
   value: PropTypes.string, 
   onChange: PropTypes.func, 
+  reset: PropTypes.bool,
+  onValidityChange: PropTypes.func,
 };
 
 export default TextboxNumber;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import '../assets/styles/trls_control.css';
 
@@ -19,7 +19,11 @@ const MultiSelect = ({
   isItalic,
   isUnderlined,
   options,
-  isRequired
+  isRequired,
+  value,
+  onChange,
+  reset,
+  onValidityChange,
 }) => {
   const labelStyles = {
     color: textColor_lb,
@@ -44,6 +48,7 @@ const MultiSelect = ({
 
   const [searchText, setSearchText] = useState('');
   const [selectedOption, setSelectedOption] = useState([]);
+  const [isValid, setIsValid] = useState(true);
 
   const optionArray = (options || '').split(';').map((option, index) => ({
     label: option,
@@ -52,7 +57,8 @@ const MultiSelect = ({
 
   const filteredOptions = optionArray.filter(
     (option) =>
-      option.label.toLowerCase().includes(searchText.toLowerCase()) && !selectedOption.includes(option.value)
+      option.label.toLowerCase().includes(searchText.toLowerCase()) &&
+      !selectedOption.includes(option.value)
   );
 
   const handleDropdownChange = (e) => {
@@ -64,7 +70,7 @@ const MultiSelect = ({
         return [...prevSelectedOptions, selectedValue];
       }
     });
-    setSearchText(''); 
+    setSearchText('');
   };
 
   const handleSearchChange = (e) => {
@@ -77,17 +83,49 @@ const MultiSelect = ({
     );
   };
 
-  useEffect(() => {
-  }, [selectedOption]);
-
-  const selectedLabels = optionArray.filter((option) =>
-    selectedOption.includes(option.value)
-  ).map((option) => option.label);
-
   const [ipLen, setIpLen] = useState('');
+
+  const prevSelectedLabelRef = useRef([]);  // Track previous value of selected labels
+
+useEffect(() => {
+  const selectedLabel = optionArray
+    .filter((option) => selectedOption.includes(option.value))
+    .map((option) => option.label);
+
+  const newIpLen = selectedLabel.join(', ');
+
+  // Only update ipLen if it changes
+  if (newIpLen !== ipLen) {
+    setIpLen(newIpLen);
+  }
+
+  // Update onChange if selectedLabel is different from the previous value
+  if (onChange && selectedLabel.join(';') !== prevSelectedLabelRef.current.join(';')) {
+    onChange(selectedLabel.join(';'));
+  }
+
+  // Update the reference to the latest selectedLabel
+  prevSelectedLabelRef.current = selectedLabel; // store the array of labels
+}, [selectedOption, optionArray, onChange,ipLen]);  // Removed ipLen from dependencies
+
+
+
+  const newIsValid = isRequired && ipLen.length < 3 ? false : true;
+
   useEffect(() => {
-    setIpLen(selectedLabels.join(', '));
-  }, [selectedLabels]);
+    if (isValid !== newIsValid) {
+      setIsValid(newIsValid);
+      if (onValidityChange) {
+        onValidityChange(disName_lb, newIsValid);
+      }
+    }
+  }, [newIsValid, isValid, disName_lb, onValidityChange]);
+
+  useEffect(() => {
+    if (reset) {
+      setSelectedOption([]); // Reset to '0', not an empty array
+    }
+  }, [reset]);
 
   return (
     <div className="input-container">
@@ -99,23 +137,25 @@ const MultiSelect = ({
       </div>
 
       <div className="search-select-wrapper">
-        <div className='selecteditems'>
-          {selectedLabels.map((label, index) => (
-            <div key={index} className="selected-item">
-              <label style={textboxStyles}>
-                {label}
-                <span
-                  className="remove-item"
-                  onClick={() => handleRemoveSelectedItem(selectedOption[index])}
-                >
-                  &times;
-                </span>
-              </label>
-            </div>
-          ))}
+        <div className="selecteditems">
+          {optionArray
+            .filter((option) => selectedOption.includes(option.value))
+            .map((option, index) => (
+              <div key={index} className="selected-item">
+                <label style={textboxStyles}>
+                  {option.label}
+                  <span
+                    className="remove-item"
+                    onClick={() => handleRemoveSelectedItem(option.value)}
+                  >
+                    &times;
+                  </span>
+                </label>
+              </div>
+            ))}
         </div>
 
-        <div className='searchitems'>
+        <div className="searchitems">
           <input
             type="text"
             value={searchText}
@@ -124,27 +164,27 @@ const MultiSelect = ({
             onChange={handleSearchChange}
           />
         </div>
-        <div className='multiselectoptions'>
-        {filteredOptions.length === 0 && searchText ? (
-          <div>No results found</div>
-        ) : (
-          <>
-            {filteredOptions.map((option, index) => (
-              <div className='items' key={index}>
-                <label className='multicheck' style={textboxStyles}>
-                  <input
-                    type="checkbox"
-                    value={option.value}
-                    checked={selectedOption.includes(option.value)}
-                    onChange={handleDropdownChange}
-                    hidden
-                  />
-                  {option.label}
-                </label>
-              </div>
-            ))}
-          </>
-        )}
+        <div className="multiselectoptions">
+          {filteredOptions.length === 0 && searchText ? (
+            <div>No results found</div>
+          ) : (
+            <>
+              {filteredOptions.map((option, index) => (
+                <div className="items" key={index}>
+                  <label className="multicheck" style={textboxStyles}>
+                    <input
+                      type="checkbox"
+                      value={option.value}
+                      checked={selectedOption.includes(option.value)}
+                      onChange={handleDropdownChange}
+                      hidden
+                    />
+                    {option.label}
+                  </label>
+                </div>
+              ))}
+            </>
+          )}
         </div>
       </div>
     </div>
@@ -169,6 +209,10 @@ MultiSelect.propTypes = {
   isUnderlined: PropTypes.bool,
   options: PropTypes.string,
   isRequired: PropTypes.bool,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  reset: PropTypes.bool,
+  onValidityChange: PropTypes.func,
 };
 
 export default MultiSelect;

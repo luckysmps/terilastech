@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useRef} from 'react';
 import PropTypes from 'prop-types';
 import '../assets/styles/trls_control.css';
 
@@ -19,7 +19,11 @@ const SearchSelect = ({
   isItalic,
   isUnderlined,
   options,
-  isRequired
+  isRequired,
+  value, 
+  onChange, 
+  reset,
+  onValidityChange,
 }) => {
   const labelStyles = {
     color: textColor_lb,
@@ -46,6 +50,10 @@ const SearchSelect = ({
   const [selectedOption, setSelectedOption] = useState('');
   const [showDropdown, setShowDropdown] = useState(0);
   const [timer, setTimer] = useState(null);
+  const [isValid, setIsValid] = useState(true);
+
+  // Use ref to store the previous selected label
+  const prevSelectedLabelRef = useRef('');
 
   const handleDropdownChange = (e) => {
     const selectedValue = e.target.value;
@@ -87,9 +95,32 @@ const SearchSelect = ({
   )?.label || '';
 
   const [ipLen, setIpLen] = useState('');
+
+        useEffect(() => {
+        const selectedLabel = optionArray.find(option => option.value === selectedOption)?.label || '';
+        setIpLen(selectedLabel);
+        if (onChange && selectedLabel && selectedLabel !== prevSelectedLabelRef.current) {
+          onChange(selectedLabel);
+        }
+        prevSelectedLabelRef.current = selectedLabel;
+      },[selectedLabel,selectedOption, onChange,optionArray]);
+
+      const newIsValid = isRequired && selectedOption === '' ? false : true;
+
   useEffect(() => {
-    setIpLen(selectedLabel);
-  }, [selectedLabel]);
+    if (isValid !== newIsValid) {
+      setIsValid(newIsValid);
+      if (onValidityChange) {
+        onValidityChange(disName_lb, newIsValid);
+      }
+    }
+  }, [newIsValid, isValid, disName_lb, onValidityChange]);
+
+  useEffect(() => {
+    if (reset) {
+      setSelectedOption(''); // Reset to '0', not an empty array
+    }
+  }, [reset]); // This will trigger when `reset` changes
 
   return (
     <div 
@@ -156,6 +187,10 @@ SearchSelect.propTypes = {
   isUnderlined: PropTypes.bool,
   options: PropTypes.string,
   isRequired: PropTypes.bool,
+    value: PropTypes.string, 
+    onChange: PropTypes.func, 
+    reset: PropTypes.bool,
+    onValidityChange: PropTypes.func,
 };
 
 export default SearchSelect;

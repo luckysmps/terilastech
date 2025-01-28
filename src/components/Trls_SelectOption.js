@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import '../assets/styles/trls_control.css';
 
@@ -19,9 +19,12 @@ const SelectOption = ({
   isItalic,
   isUnderlined,
   options,
-  isRequired
+  isRequired,
+  value,
+  onChange,
+  reset,
+  onValidityChange,
 }) => {
-
   const labelStyles = {
     color: textColor_lb,
     backgroundColor: bgColor_lb,
@@ -30,7 +33,6 @@ const SelectOption = ({
     fontWeight: isBold_lb ? 'bold' : 'normal',
     fontStyle: isItalic_lb ? 'italic' : 'normal',
     textDecoration: isUnderlined_lb ? 'underline' : 'none',
-
   };
 
   const textboxStyles = {
@@ -44,46 +46,75 @@ const SelectOption = ({
     width: '100%',
   };
 
-  const [selectedOption, setSelectedOption] = useState('0');
+  const [selectedOption, setSelectedOption] = useState('');
+  const [isValid, setIsValid] = useState(true);
+
+  // Use ref to store the previous selected label
+  const prevSelectedLabelRef = useRef('');
 
   const handleDropdownChange = (e) => {
-    setSelectedOption(e.target.value);
+    const selectedValue = e.target.value;
+    setSelectedOption(selectedValue);
   };
 
-  const optionArray =  (options || '').split(';').map((option, index) => ({
-    label: option,
-    value: `${index + 1}`, // Using the index + 1 as the value for each option
-  }));
+  const optionArray = (options || '')
+    .split(';')
+    .map((option, index) => ({
+      label: option,
+      value: `${index + 1}`, // Using the index + 1 as the value for each option
+    }));
+
+  useEffect(() => {
+    const selectedLabel = optionArray.find(option => option.value === selectedOption)?.label || '';
+
+    // Only trigger onChange if the label has changed
+    if (onChange && selectedLabel && selectedLabel !== prevSelectedLabelRef.current) {
+      onChange(selectedLabel);
+    }
+
+    // Update the ref with the new selected label
+    prevSelectedLabelRef.current = selectedLabel;
+  }, [selectedOption, onChange, optionArray]);
+
+  const newIsValid = isRequired && selectedOption === '' ? false : true;
+
+  useEffect(() => {
+    if (isValid !== newIsValid) {
+      setIsValid(newIsValid);
+      if (onValidityChange) {
+        onValidityChange(disName_lb, newIsValid);
+      }
+    }
+  }, [newIsValid, isValid, disName_lb, onValidityChange]);
+
+  useEffect(() => {
+    if (reset) {
+      setSelectedOption(''); // Reset to '0', not an empty array
+    }
+  }, [reset]); // This will trigger when `reset` changes
 
   return (
     <div className="input-container">
-        <div className='displyname'>
-      <div className='displynamelable'>
-      <label style={labelStyles}>
-        {disName_lb}
-      </label>
+      <div className="displyname">
+        <div className="displynamelable">
+          <label style={labelStyles}>{disName_lb}</label>
+        </div>
+        {isRequired && selectedOption === '' && <div className="asterisk">*</div>}
       </div>
-        {isRequired && selectedOption === '0' && <div className="asterisk">*</div>}
-
-    </div>
       <div className="valueclass">
         <select
           value={selectedOption}
           onChange={handleDropdownChange}
-          style={textboxStyles} 
+          style={textboxStyles}
         >
-          {isRequired && <option value="0">Select</option>}:
+          {isRequired && <option value="0">Select</option>}
           {optionArray.map((option, index) => (
-
             <option key={index} value={option.value}>
               {option.label}
             </option>
           ))}
         </select>
-     
-       
       </div>
-
     </div>
   );
 };
@@ -104,8 +135,11 @@ SelectOption.propTypes = {
   isBold: PropTypes.bool,
   isItalic: PropTypes.bool,
   isUnderlined: PropTypes.bool,
-  options: PropTypes.string, 
-  isRequired: PropTypes.bool, 
+  options: PropTypes.string,
+  isRequired: PropTypes.bool,
+  reset: PropTypes.bool,
+  onValidityChange: PropTypes.func,
+
 };
 
 export default SelectOption;

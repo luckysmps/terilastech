@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import PropTypes from 'prop-types';
 import '../assets/styles/trls_control.css';
 
@@ -19,7 +19,12 @@ const SelectStar = ({
   isItalic,
   isUnderlined,
   options,
-  isRequired
+  isRequired,
+  value, 
+  onChange, 
+  reset,
+  onValidityChange,
+  
 }) => {
 
   const labelStyles = {
@@ -44,8 +49,8 @@ const SelectStar = ({
     width: '100%',
   };
 
-  const [selectedOption, setSelectedOption] = useState(0);
-
+  const [selectedOption, setSelectedOption] = useState('');
+  const [isValid, setIsValid] = useState(true);
   const optionArray =  (options || '').split(';').map((option, index) => ({
     label: option,
     value: `${index + 1}`,
@@ -59,6 +64,32 @@ const SelectStar = ({
     }
 
   };
+
+  
+  const newIsValid = isRequired && selectedOption ==='' ? false : true;
+
+  
+  useEffect(() => {
+    if (onChange && selectedOption !== value) {
+      onChange(selectedOption);
+    }
+  }, [selectedOption, onChange]);
+  
+
+  useEffect(() => {
+    if (isValid !== newIsValid) {
+      setIsValid(newIsValid);
+      
+        onValidityChange?.(disName_lb, newIsValid);
+      }    
+  }, [ newIsValid, isValid, disName_lb, onValidityChange]);
+
+  useEffect(() => {
+    if (reset) {
+      setSelectedOption('');
+    }
+  }, [reset]); // This will trigger when `reset` changes
+
   return (
     <div className="input-container">
         <div className='displyname'>
@@ -67,7 +98,7 @@ const SelectStar = ({
         {disName_lb}
       </label>
       </div>
-        {isRequired && selectedOption === 0 && <div className="asterisk">*</div>}
+        {isRequired && selectedOption ==='' && <div className="asterisk">*</div>}
 
     </div>
       <div className="valueclassss">
@@ -77,12 +108,12 @@ const SelectStar = ({
                 <label className='starselect' style={textboxStyles}>
                       <input
                       type="radio"
-                      value={option.value}
-                      onClick={() => handleStarClick(Number(option.value))}
+                      value={option.label}
+                      onClick={() => handleStarClick(option.label)}
                       style={{display:"none"}}
                     />
                 <span
-                className={`startlabel ${selectedOption >= Number(option.value) ? 'selected' : ''}`}
+                className={`startlabel ${selectedOption >= (option.label) ? 'selected' : ''}`}
                 >
                 &#9733;
               </span>
@@ -114,6 +145,10 @@ SelectStar.propTypes = {
   isUnderlined: PropTypes.bool,
   options: PropTypes.string, 
   isRequired: PropTypes.bool, 
+    value: PropTypes.string, 
+    onChange: PropTypes.func, 
+      reset: PropTypes.bool,
+  onValidityChange: PropTypes.func,
 };
 
 export default SelectStar;

@@ -35,6 +35,18 @@ const PageCreation = () => {
     ));
   };
 
+  const handleCreate = () => {
+    // Prepare the data in JSON format
+    console.log("Rows Data:", rows);
+    const dataToSave = rows.map(row => ({
+      id: row.id,
+      controlType: row.dropdownValue,
+      properties: row.properties,
+    }));
+
+    // Display the generated JSON data in an alert
+    alert(JSON.stringify(dataToSave, null, 2)); // The `null, 2` makes the JSON more readable (pretty-print)
+  };
 
 
   return (
@@ -160,8 +172,15 @@ const PageCreation = () => {
         <div className="add-row-button">
           <button onClick={handleAddRow}>Add New Parameter</button>
         </div>
+
+          {/* Create Button */}
+          <div className="create-button">
+          <button onClick={handleCreate}>Create</button>
+        </div>
+   
       </div>
   
+
       {/* Preview Section */}
       <div className="previewpage-container">
       <div className='pcppheader'>Preview</div>
