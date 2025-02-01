@@ -1,4 +1,4 @@
-import React, { useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import TextboxText from './Trls_TextboxText';
 import TextboxNumber from './Trls_TextboxNumber';
 import TextboxMultiline from './Trls_TextboxMultiline';
@@ -10,99 +10,127 @@ import SearchSelect from './Trls_SearchSelect';
 import MultiSelect from './Trls_MultiSelect';
 import '../assets/styles/trls_previewPage.css';
 
-const PreviewPage = ({ rows }) => {
-  // Initialize state for form data
- 
+const PreviewPage = ({ rows, selectedColumnValues }) => {
   const [formData, setFormData] = useState({});
   const [resetFlag, setResetFlag] = useState(false);
   const [validFields, setValidFields] = useState({});
 
-  // Handle change for each component type
   const handleChange = (displayName, value) => {
     setFormData((prevData) => ({
       ...prevData,
       [displayName]: value,
     }));
-
-    
   };
 
-  const handleSubmit = () => {
-    const resetFormData = {};
-
-    rows.forEach((row) => {
-      const displayName = row.properties.disName_lb; 
-      const value = formData[displayName] || [];
-      resetFormData[displayName] = value; 
-    });
-
-    alert(JSON.stringify(resetFormData, null, 2));
-
-   setFormData({});
-   setResetFlag(true);
-  };
-
-  const handleValidityChange = (displayName, isValid) => {
+  const handleValidityChange = (cid, isValid) => {
     setValidFields((prevValidFields) => ({
       ...prevValidFields,
-      [displayName]: isValid,
+      [cid]: isValid,
     }));
   };
 
+  const handleSubmit = () => {
+    const dataToExport = rows.map((row) => {
+      const rowData = {};
+      Object.keys(row.properties).forEach((columnIndex) => {
+        const columnProperties = row.properties[columnIndex];
+        const displayName = columnProperties.disName_lb || `Row ${row.id}, Column ${parseInt(columnIndex) + 1}`;
+        rowData[displayName] = formData[columnProperties.disName_lb] || '';
+      });
+      return rowData;
+    });
+
+    alert(JSON.stringify(dataToExport, null, 2));
+
+    // Reset form data and validity states
+    setFormData({});
+    setValidFields({});
+    setResetFlag(true);
+  };
   useEffect(() => {
     if (resetFlag) {
-      // Reset flag back to false after reset logic
-      setTimeout(() => {
-          setResetFlag(false);
-      }, 0); // Ensures it resets only after one render cycle
+      // Set formData and validFields to empty only once.
+      setFormData({});
+      setValidFields({});
+      
+      // Use setTimeout to reset the flag after a short delay.
+      const timer = setTimeout(() => {
+        setResetFlag(false);
+      }, 0);
+  
+      // Cleanup timeout to avoid memory leaks
+      return () => clearTimeout(timer);
     }
   }, [resetFlag]);
 
-  // Check if all required fields are valid
-  const isSubmitDisabled = Object.values(validFields).includes(false);
+  console.log(formData)
+  // Ensure form validity is checked properly
+  const isSubmitDisabled = rows.some(row =>
+    Object.keys(row.properties).some((columnIndex) => {
+      const columnProperties = row.properties[columnIndex];
+      const displayName = columnProperties.disName_lb;
+      return !formData[displayName] || validFields[row.id * 10 + parseInt(columnIndex)] === false;
+    })
+  );
+  
+  const getComponentForType = (type) => {
+    const componentMap = {
+      '1': TextboxText,
+      '2': TextboxNumber,
+      '3': TextboxMultiline,
+      '4': CheckList,
+      '5': SelectOption,
+      '6': SelectChoice,
+      '7': SelectStar,
+      '8': SearchSelect,
+      '9': MultiSelect,
+    };
+    return componentMap[type] || null;
+  };
 
-   return (
+  return (
     <div className="preview-page">
       <div className="preview-container">
         {rows.map((row) => {
-          const Component = getComponentForType(row.dropdownValue);  // Get the right component dynamically
+          const columnCount = parseInt(row.dropdownValue, 10) || 0;
           return (
             <div key={row.id} style={{ marginBottom: '20px' }}>
-              {row.properties && Component ? (
-                <Component
-                  {...row.properties}
-                  value={formData[row.properties.disName_lb] || ''}
-                  onChange={(value) => handleChange(row.properties.disName_lb, value)}
-                  reset={(resetFlag)}  // Reset logic for individual components
-                  onValidityChange={handleValidityChange}
-                />
-              ) : (
-                <div>The next control action is initiated.</div>
-              )}
+              <div style={{ display: 'grid', gridTemplateColumns: `repeat(${columnCount}, 1fr)`, gap: '20px', width: '100%' }}>
+                {[...Array(columnCount)].map((_, index) => {
+                  const selectedValue = selectedColumnValues[row.id]?.[index] || '0';
+                  const Component = getComponentForType(selectedValue);
+                  const columnProperties = row.properties[index] || {};
+
+                  return (
+                    <div key={index}>
+                      {Component ? (
+                        <Component
+                          cid={row.id * 10 + index}
+                          {...columnProperties}
+                          value={resetFlag ? '' : formData[columnProperties.disName_lb] || ''}
+                          onChange={(value) => handleChange(columnProperties.disName_lb, value)}
+                          reset={resetFlag}
+                          onValidityChange={(isValid) => handleValidityChange(row.id * 10 + index, isValid)}
+                        />
+                      ) : (
+                        <div>Select a valid component</div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           );
         })}
-        <div className="submitpreview"></div>
-        <button onClick={handleSubmit} disabled={isSubmitDisabled}>Submit</button>
+
+        <div className="submitpreview">
+          <button onClick={handleSubmit} disabled={isSubmitDisabled}>
+            Export to Excel
+          </button>
+        </div>
       </div>
     </div>
   );
-};
-
-// Function to map dropdownValue to the correct component
-const getComponentForType = (type) => {
-  const componentMap = {
-    '1': TextboxText,
-    '2': TextboxNumber,
-    '3': TextboxMultiline,
-    '4': CheckList,
-    '5': SelectOption,
-    '6': SelectChoice,
-    '7': SelectStar,
-    '8': SearchSelect,
-    '9': MultiSelect,
-  };
-  return componentMap[type] || null;
 };
 
 export default PreviewPage;

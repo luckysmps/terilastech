@@ -17,6 +17,10 @@ function App() {
     switch (selectedPage) {
       case 'home':
         return <Home />;
+      case 'ai_hub':
+        return <Home />;
+      case 'apps':
+        return <Home />;
       case 'about':
         return <About />;
       case 'contact':

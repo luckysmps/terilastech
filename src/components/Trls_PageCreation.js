@@ -77,54 +77,63 @@ const PageCreation = () => {
                           {row.dropdownValue === '1'  && (
                             <PropertiesComponent
                               label={row.dropdownValue}
+                              dspname = {`Display Name-${row.dropdownValue}`}
                               onChange={(properties) => handlePropertiesChange(row.id, properties)}
                             />
                           )}
                            {row.dropdownValue === '2' && (
                             <PropertiesComponent
                               label={row.dropdownValue}
+                              dspname = {`Display Name-${row.dropdownValue}`}
                               onChange={(properties) => handlePropertiesChange(row.id, properties)}
                             />
                           )}
                            {row.dropdownValue === '3' && (
                             <PropertiesComponent
                               label={row.dropdownValue}
+                              dspname = {`Display Name-${row.dropdownValue}`}
                               onChange={(properties) => handlePropertiesChange(row.id, properties)}
                             />
                           )}
                           {row.dropdownValue === '4' && (
                             <PropertiesComponent
                               label={row.dropdownValue}
+                              dspname = {`Display Name-${row.dropdownValue}`}
                               onChange={(properties) => handlePropertiesChange(row.id, properties)}
                             />
                           )}
                            {row.dropdownValue === '5' && (
                             <PropertiesComponent
                               label={row.dropdownValue}
+                              dspname = {`Display Name-${row.dropdownValue}`}
                               onChange={(properties) => handlePropertiesChange(row.id, properties)}
                             />
                           )}
                           {row.dropdownValue === '6' && (
                             <PropertiesComponent
                               label={row.dropdownValue}
+                              dspname = {`Display Name-${row.dropdownValue}`}
                               onChange={(properties) => handlePropertiesChange(row.id, properties)}
                             />
                           )}
                            {row.dropdownValue === '7' && (
                             <PropertiesComponent
                               label={row.dropdownValue}
+                              dspname = {`Display Name-${row.dropdownValue}`}
                               onChange={(properties) => handlePropertiesChange(row.id, properties)}
                             />
                           )}
                            {row.dropdownValue === '8' && (
                             <PropertiesComponent
                               label={row.dropdownValue}
+                              dspname = {`Display Name-${row.dropdownValue}`}
                               onChange={(properties) => handlePropertiesChange(row.id, properties)}
                             />
                           )}
                           {row.dropdownValue === '9' && (
                             <PropertiesComponent
                               label={row.dropdownValue}
+                              dspname = {`Display Name-${row.dropdownValue}`}
                               onChange={(properties) => handlePropertiesChange(row.id, properties)}
                             />
                           )}

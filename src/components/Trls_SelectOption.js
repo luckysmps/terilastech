@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import '../assets/styles/trls_control.css';
 
 const SelectOption = ({
+  cid,
   disName_lb,
   bgColor_lb,
   textColor_lb,
@@ -46,7 +47,7 @@ const SelectOption = ({
     width: '100%',
   };
 
-  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedOption, setSelectedOption] = useState(value || "0");
   const [isValid, setIsValid] = useState(true);
 
   // Use ref to store the previous selected label
@@ -76,30 +77,29 @@ const SelectOption = ({
     prevSelectedLabelRef.current = selectedLabel;
   }, [selectedOption, onChange, optionArray]);
 
-  const newIsValid = isRequired && selectedOption === '' ? false : true;
+  const newIsValid = isRequired && selectedOption === "0"? false : true;
 
   useEffect(() => {
     if (isValid !== newIsValid) {
       setIsValid(newIsValid);
       if (onValidityChange) {
-        onValidityChange(disName_lb, newIsValid);
+        onValidityChange(cid, newIsValid);
       }
     }
-  }, [newIsValid, isValid, disName_lb, onValidityChange]);
+  }, [newIsValid, isValid, cid, onValidityChange]);
 
   useEffect(() => {
     if (reset) {
-      setSelectedOption(''); // Reset to '0', not an empty array
+      setSelectedOption("0"); // Reset to '0', not an empty array
     }
   }, [reset]); // This will trigger when `reset` changes
-
   return (
     <div className="input-container">
       <div className="displyname">
         <div className="displynamelable">
           <label style={labelStyles}>{disName_lb}</label>
         </div>
-        {isRequired && selectedOption === '' && <div className="asterisk">*</div>}
+        {isRequired && selectedOption ==="0" && <div className="asterisk">*</div>}
       </div>
       <div className="valueclass">
         <select
@@ -120,6 +120,7 @@ const SelectOption = ({
 };
 
 SelectOption.propTypes = {
+  cid: PropTypes.number,
   disName_lb: PropTypes.string,
   bgColor_lb: PropTypes.string,
   textColor_lb: PropTypes.string,

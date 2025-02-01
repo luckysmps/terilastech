@@ -1,8 +1,9 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect,useRef } from 'react';
 import PropTypes from 'prop-types';
 import '../assets/styles/trls_control.css';
 
 const SelectStar = ({
+  cid,
   disName_lb,
   bgColor_lb,
   textColor_lb,
@@ -57,20 +58,19 @@ const SelectStar = ({
   }));
 
   const handleStarClick  = (value) => {
-    if (value === selectedOption) {
-      setSelectedOption(0); 
-    } else {
-      setSelectedOption(value);  
-    }
+    setSelectedOption(value === selectedOption ? '' : value);
 
   };
 
-  
   const newIsValid = isRequired && selectedOption ==='' ? false : true;
 
-  
+  const valueRef = useRef(value);
   useEffect(() => {
-    if (onChange && selectedOption !== value) {
+    valueRef.current = value;
+  }, [value]);
+
+  useEffect(() => {
+    if (onChange && selectedOption !== valueRef.current) {
       onChange(selectedOption);
     }
   }, [selectedOption, onChange]);
@@ -80,9 +80,9 @@ const SelectStar = ({
     if (isValid !== newIsValid) {
       setIsValid(newIsValid);
       
-        onValidityChange?.(disName_lb, newIsValid);
+        onValidityChange?.(cid, newIsValid);
       }    
-  }, [ newIsValid, isValid, disName_lb, onValidityChange]);
+  }, [ newIsValid, isValid, cid, onValidityChange]);
 
   useEffect(() => {
     if (reset) {
@@ -128,6 +128,7 @@ const SelectStar = ({
 };
 
 SelectStar.propTypes = {
+  cid: PropTypes.number,
   disName_lb: PropTypes.string,
   bgColor_lb: PropTypes.string,
   textColor_lb: PropTypes.string,

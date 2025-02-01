@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 import PropTypes from 'prop-types';
 import '../assets/styles/trls_control.css'
 const TextboxText = ({
+  cid,
   disName_lb,
   bgColor_lb,
   textColor_lb,
@@ -55,7 +56,9 @@ const TextboxText = ({
   }
   
   useEffect(() => {
-    setIpLen('');
+    if (reset) {
+      setIpLen('');
+    }
   }, [reset]);
 
   const newIsValid = isRequired && ipLen.length < 3 ? false : true;
@@ -64,11 +67,11 @@ const TextboxText = ({
     if (isValid !== newIsValid) {
       setIsValid(newIsValid);
       if (onValidityChange) {
-        onValidityChange(disName_lb, newIsValid);
+        onValidityChange(cid, newIsValid);
+       
       }
     }
-  }, [ipLen, newIsValid, isValid, disName_lb, onValidityChange]);
-
+  }, [ipLen, newIsValid, isValid, cid, onValidityChange]);
   return (
     <div className='input-container'>
     <div className='displyname'>
@@ -93,7 +96,9 @@ const TextboxText = ({
   );
 };
 
+
 TextboxText.propTypes = {
+  cid: PropTypes.number,
   disName_lb: PropTypes.string,
   bgColor_lb: PropTypes.string,
   textColor_lb: PropTypes.string,

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import '../assets/styles/trls_control.css';
 
 const SearchSelect = ({
+  cid,
   disName_lb,
   bgColor_lb,
   textColor_lb,
@@ -111,10 +112,10 @@ const SearchSelect = ({
     if (isValid !== newIsValid) {
       setIsValid(newIsValid);
       if (onValidityChange) {
-        onValidityChange(disName_lb, newIsValid);
+        onValidityChange(cid, newIsValid);
       }
     }
-  }, [newIsValid, isValid, disName_lb, onValidityChange]);
+  }, [newIsValid, isValid, cid, onValidityChange]);
 
   useEffect(() => {
     if (reset) {
@@ -170,6 +171,7 @@ const SearchSelect = ({
 };
 
 SearchSelect.propTypes = {
+  cid: PropTypes.number,
   disName_lb: PropTypes.string,
   bgColor_lb: PropTypes.string,
   textColor_lb: PropTypes.string,

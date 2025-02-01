@@ -1,25 +1,51 @@
+.properties-main-content{
+  position: fixed;           
+  top: 0;                    
+  left: 0;                   
+  right: 0;                 
+  bottom: 0;                
+  background-color: rgba(0, 0, 0, 0.5);  
+  display: flex;            
+  justify-content: center;   
+  align-items: center;     
+  z-index: 9999;   
+  flex-direction: row;    
+  flex-wrap: wrap;     
+  margin: 10px;
+  border: 3px solid white;
+
+}
+
+.properties-close-button button{
+  position: absolute;
+  top: 10px;                     
+  right: 10px;                 
+  height: 50px;
+  width: 50px;
+  border: 5px solid white;
+  color: red;
+  border-radius: 100px;
+  font-size: 25px;
+  cursor: pointer;
+  background-color: transparent;
+  font-weight: 700;
+}
+
+.properties-close-button button:hover{
+  background-color: white;
+  border: 5px solid red;;
+}
 .properties-panel{
-    display:flex;
+  
+    display:fixed;
     flex-direction: column;
-    width: 80%;
+    width: 50%;
     background-color:#CBDCEB;
-    margin-bottom: 10px ;
-    margin-top: 20px;
-    margin-right: 2px;
-    padding: 2px;
-    border: 2px solid black;
-    border-radius: 5px;
-    height: 50px;
-    overflow-y: hidden;
-    transition: height 2s ease; 
-}
-
-.properties-panel.collapsed {
-  height: 50;
-}
-
-.properties-panel.expanded {
-  height: auto;
+    border: 5px solid gray;
+    border-radius: 20px;
+    height: auto;
+    overflow-y: auto;
+    
 }
 
 
@@ -34,10 +60,22 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 2px;
-    padding-bottom: 2px;
+    gap:10px;
+    padding: 5px;
     border-bottom: 4px double gray;
     width: 100%;
+    margin-bottom: 10px;
+}
+
+.proptype1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:300px;
+  padding: 5px;
+  border-bottom: 4px double gray;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .proptype label {
@@ -48,18 +86,35 @@
     font-weight: 600;
     text-align: right;
     width: 30%;
-    white-space: nowrap;
+    font-size: 20px;
+     height: 30px;
+
 }
-  .proptype input {
-    flex: 1; 
+  .proptype input  {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 10px;
+    font-size: 15px;
     line-height:1.0rem;
     margin-left:2px ;
     width:40% ;
     color: black;
+    height: 30px;
+    text-align: center;
+
   }
   
+  .proptype textarea  {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    line-height:1.0rem;
+    margin-left:2px ;
+    width:40% ;
+    color: black;
+    height: 30px;
+    text-align: center;
+
+  }
+  
+
   .proptype input, .proptype label {
     white-space: nowrap; 
     display: inline-block;
