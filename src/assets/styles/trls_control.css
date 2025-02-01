@@ -303,6 +303,7 @@ transition: transform 0.3s ease;
     justify-content: center;
     width: 100%;
   }
+  
   .column-layout-button button{
     height: 20px;
     font-family: 'Courier New', Courier, monospace;

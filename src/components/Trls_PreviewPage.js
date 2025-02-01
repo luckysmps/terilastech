@@ -63,16 +63,18 @@ const PreviewPage = ({ rows, selectedColumnValues }) => {
     }
   }, [resetFlag]);
 
-  console.log(formData)
-  // Ensure form validity is checked properly
-  const isSubmitDisabled = rows.some(row =>
-    Object.keys(row.properties).some((columnIndex) => {
-      const columnProperties = row.properties[columnIndex];
-      const displayName = columnProperties.disName_lb;
-      return !formData[displayName] || validFields[row.id * 10 + parseInt(columnIndex)] === false;
-    })
-  );
-  
+ 
+  const isFormDataEmpty = Object.values(formData).every(value => value === '' || value === null || value === undefined);
+
+const isSubmitDisabled = isFormDataEmpty || rows.some(row =>
+  Object.keys(row.properties).some((columnIndex) => {
+    const columnProperties = row.properties[columnIndex];
+    const displayName = columnProperties.disName_lb;
+    return !formData[displayName] || validFields[row.id * 10 + parseInt(columnIndex)] === false;
+  })
+);
+
+
   const getComponentForType = (type) => {
     const componentMap = {
       '1': TextboxText,
@@ -95,7 +97,13 @@ const PreviewPage = ({ rows, selectedColumnValues }) => {
           const columnCount = parseInt(row.dropdownValue, 10) || 0;
           return (
             <div key={row.id} style={{ marginBottom: '20px' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: `repeat(${columnCount}, 1fr)`, gap: '20px', width: '100%' }}>
+              <div style={{
+                     display: window.innerWidth < 768 ? 'flex' : 'grid',
+                     flexDirection: window.innerWidth < 768 ? 'column' : 'unset',
+                     gridTemplateColumns: window.innerWidth >= 768 ? `repeat(${columnCount}, 1fr)` : 'unset',
+                     gap: '20px',
+                     width: '100%',
+              }}>
                 {[...Array(columnCount)].map((_, index) => {
                   const selectedValue = selectedColumnValues[row.id]?.[index] || '0';
                   const Component = getComponentForType(selectedValue);

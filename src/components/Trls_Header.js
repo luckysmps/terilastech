@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../assets/styles/trls_Header.css'
-import logo from '../assets/images/logo_symbol.png'
+import logo from '../assets/images/trlslogo.svg'
 
 const Trls_Header = ({handleNavigation}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,10 +22,10 @@ const Trls_Header = ({handleNavigation}) => {
     <header className="header">
       <div className="logo">
        <img src={logo} alt='TeRiLaS Tech' />
-       <div className="text-container">
-    <h1>TeRiLaS Tech</h1>
-    <h2 className="slogan">- Work Smarter, Not Harder -</h2>
-  </div>
+            {/* <div className="text-container">
+            <h1>TeRiLaS Tech</h1>
+            <h2 className="slogan">- Work Smarter, Not Harder -</h2>
+            </div> */}
       </div>
       <nav className={`nav ${isMenuOpen ? 'active' : ''}`}>
         <ul>

@@ -130,8 +130,6 @@ align-items: center;
 
 .gallery-select{
     width: 70%;
-
-
 }
 
 .gallery-row select{
@@ -196,15 +194,36 @@ margin-left: 40px;
   
 }
 
+.pcppheader, .pcpheader{
+    font-size: 20px;
+  }
+
+
+.pcppheader{
+    font-size: 15px;
+  }
+
 .gallery-layout{
     display: flex;
-    width:72%;
-    display: flex;
-    justify-content: center;
+    width:100%;
+    justify-content: flex-start;
     border-right: none;
     border-bottom: 3px solid gray;
-    margin: 0px;
     
+}
+
+.gallery-layout select{
+     width:100%;
+     justify-content: flex-start;
+    
+}
+
+
+.gallery-select{
+    display: flex;
+    width:100%;
+    justify-content: flex-start;
+   
 }
 
 .gallery-row{
@@ -214,6 +233,15 @@ margin-left: 40px;
     flex-wrap: wrap;
     margin-bottom: 20px;
 }
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+
 
 .previewpage-container{
     width: 100%;
@@ -235,9 +263,10 @@ margin-left: 40px;
     overflow: hidden;
 }
 .buttonsdiv{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(50%, 2fr)); 
-    justify-content: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 100px;
 }
 
 .buttonsdiv .add-row-button{
@@ -249,45 +278,11 @@ margin-left: 40px;
     justify-content: flex-end;
     
 }
-
-}
-
-@media (max-width: 760px) {
-
-    .gallery-mainpage{
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        gap: 20px;
-      
-    }
-    
-    .gallery-row{
-        
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        margin-bottom: 20px;
-    }
-    
-    .previewpage-container{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .previewpage{
-        
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;   
-    }
-    .buttonsdiv  button{
+.buttonsdiv  button{
         width: 150px;
         height: 30px;
         cursor: pointer;
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 600;
         } 
     
