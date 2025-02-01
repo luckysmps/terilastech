@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/terilastech/static/css/main.092ac001.css",
-    "main.js": "/terilastech/static/js/main.b4d3c9fe.js",
+    "main.css": "/terilastech/static/css/main.941497d2.css",
+    "main.js": "/terilastech/static/js/main.f7c55919.js",
     "static/js/685.5a67e249.chunk.js": "/terilastech/static/js/685.5a67e249.chunk.js",
     "static/media/logo.png": "/terilastech/static/media/logo.47b57b17a4e3e190af2d.png",
     "static/media/ENG.png": "/terilastech/static/media/ENG.7309a1f2a0b3e9207fd6.png",
@@ -15,7 +15,7 @@
     "index.html": "/terilastech/index.html"
   },
   "entrypoints": [
-    "static/css/main.092ac001.css",
-    "static/js/main.b4d3c9fe.js"
+    "static/css/main.941497d2.css",
+    "static/js/main.f7c55919.js"
   ]
 }
