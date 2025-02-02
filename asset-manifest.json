@@ -1,23 +1,26 @@
 {
   "files": {
-    "main.css": "/terilastech/static/css/main.c31d32ea.css",
-    "main.js": "/terilastech/static/js/main.4a8d09ae.js",
+    "main.css": "/terilastech/static/css/main.937e1a98.css",
+    "main.js": "/terilastech/static/js/main.993fd94d.js",
     "static/js/685.5a67e249.chunk.js": "/terilastech/static/js/685.5a67e249.chunk.js",
     "static/media/trlslogo.png": "/terilastech/static/media/trlslogo.b7585a997d601f426319.png",
-    "static/media/trlslogo.svg": "/terilastech/static/media/trlslogo.ffec4fe324dbeccfee3d226ff13ce224.svg",
     "static/media/logo.png": "/terilastech/static/media/logo.47b57b17a4e3e190af2d.png",
     "static/media/ENG.png": "/terilastech/static/media/ENG.7309a1f2a0b3e9207fd6.png",
     "static/media/1.png": "/terilastech/static/media/1.109f2fc5dc8aa6e103e4.png",
     "static/media/AIR.png": "/terilastech/static/media/AIR.cfcce2d7aa2a386df566.png",
     "static/media/SEO.png": "/terilastech/static/media/SEO.63b16cfd4a9e0a9ca3bf.png",
+    "static/media/form.png": "/terilastech/static/media/form.e95be27efbc764dfd74d.png",
     "static/media/logo_symbol.png": "/terilastech/static/media/logo_symbol.42e643e346f118354a13.png",
+    "static/media/task.png": "/terilastech/static/media/task.e1b2c6d68da01946d927.png",
     "static/media/Auto.png": "/terilastech/static/media/Auto.ef6ab66fb0dac128f333.png",
     "static/media/BPO.png": "/terilastech/static/media/BPO.bcabe17de7a4e63625ed.png",
     "static/media/delete.png": "/terilastech/static/media/delete.fa7b3f02c030a1906bca.png",
+    "static/media/time.png": "/terilastech/static/media/time.ee2f0c7089fd27c38e32.png",
+    "static/media/data.png": "/terilastech/static/media/data.fb758d73860f074bc96b.png",
     "index.html": "/terilastech/index.html"
   },
   "entrypoints": [
-    "static/css/main.c31d32ea.css",
-    "static/js/main.4a8d09ae.js"
+    "static/css/main.937e1a98.css",
+    "static/js/main.993fd94d.js"
   ]
 }
