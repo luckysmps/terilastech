@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/terilastech/static/css/main.937e1a98.css",
+    "main.css": "/terilastech/static/css/main.698e2155.css",
     "main.js": "/terilastech/static/js/main.993fd94d.js",
     "static/js/685.5a67e249.chunk.js": "/terilastech/static/js/685.5a67e249.chunk.js",
     "static/media/trlslogo.png": "/terilastech/static/media/trlslogo.b7585a997d601f426319.png",
@@ -20,7 +20,7 @@
     "index.html": "/terilastech/index.html"
   },
   "entrypoints": [
-    "static/css/main.937e1a98.css",
+    "static/css/main.698e2155.css",
     "static/js/main.993fd94d.js"
   ]
 }
