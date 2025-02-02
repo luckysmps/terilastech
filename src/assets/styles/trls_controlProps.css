@@ -136,7 +136,7 @@
       border: 5px solid red;;
     }
     .properties-panel{
-      
+        top: 200px;
         display:fixed;
         flex-direction: column;
         width: 90%;

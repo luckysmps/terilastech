@@ -1,0 +1,134 @@
+.myapps-container {
+  position: fixed;
+  background-color: #f5f3ee;
+  border: 10px double black;
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-start;
+  align-items: center;
+  width: 70%;
+  height: 70%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  overflow-y: auto;
+}
+
+.myapps-header {
+  width: 100%;
+  height: 70px;
+  background-color: #e55b1c;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.8em;
+  font-weight: bold;
+  border-bottom: 3px solid black;
+  z-index: 2;
+}
+
+.myapps-cardcontainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+  grid-gap: 50px; 
+  padding: 20px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.myapps-card {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  aspect-ratio: 1;
+  border: 2px solid black;
+}
+
+.myapps-title {
+  border-radius: 15px 15px 0 0;
+  width: 100%;
+  height: 50px; 
+  background-color: #cdcdcd;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 2px solid black;
+}
+
+.myapps-image {
+  border-radius: 5px;
+  width: 100%;
+  height: 100%; 
+  overflow: hidden; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.myapps-image img {
+  width: 100%; 
+  height: 100%; 
+  object-fit:cover; 
+  object-position: center;
+  margin: 0;
+}
+
+.myapps-footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  border-top: 2px solid #ddd;
+  margin-top: auto; 
+}
+
+.myapps_start_button {
+  width: 80%;
+  padding: 12px 20px;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: white;
+  background-color: gray;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.myapps_start_button:hover {
+  background-color: #e55b1c;
+}
+
+
+
+@media (max-width: 768px) {
+  .myapps-container {
+    position: fixed;
+    background-color: #f5f3ee;
+    border: 10px double black;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: center;
+    width: 70%;
+    height: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    overflow-y: auto;
+  }
+  .myapps-card {
+    height: auto; 
+  }
+}

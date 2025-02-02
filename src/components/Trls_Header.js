@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../assets/styles/trls_Header.css'
-import logo from '../assets/images/trlslogo.svg'
+import logo from '../assets/images/trlslogo.png'
 
 const Trls_Header = ({handleNavigation}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,7 +31,7 @@ const Trls_Header = ({handleNavigation}) => {
         <ul>
           <li><a href="#home" onClick={(e) => handleClick (e, 'home')} className={selectedItem === 'home' ? 'selected' : ''}>Home</a></li>
           <li><a href="#ai_hub" onClick={(e) => handleClick (e, 'ai_hub')} className={selectedItem === 'ai_hub' ? 'selected' : ''}>AI Hub</a></li>
-          <li><a href="#apps" onClick={(e) => handleClick (e, 'apps')} className={selectedItem === 'apps' ? 'selected' : ''}>Apps</a></li>
+          <li><a href="#myapps" onClick={(e) => handleClick (e, 'myapps')} className={selectedItem === 'myapps' ? 'selected' : ''}>My Apps</a></li>
           <li><a href="#about" onClick={(e) => handleClick (e, 'about')} className={selectedItem === 'about' ? 'selected' : ''}> About</a></li>
           <li><a href="#contact" onClick={(e) => handleClick (e, 'contact')} className={selectedItem === 'contact' ? 'selected' : ''}>Contact</a></li>
         </ul>

@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Task Management",
+    "image": "task.png"
+  },
+  {
+    "title": "Time Management",
+    "image": "time.png"
+  },
+  {
+    "title": "Data Management",
+      "image": "data.png"
+   
+  },
+  {
+    "title": "Form/Survay",
+     "image": "form.png"
+   
+  }
+]

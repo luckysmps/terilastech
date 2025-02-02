@@ -22,14 +22,13 @@
     width: 100%;
     background-color: #ffffff;
     height: 40px;
-    border: 2px solid #e55b1c;
+    border: 2px solid gray;
     font-weight: 700;
     font-family:'Times New Roman', Times, serif;
     font-size: 25px;
     border-radius: 10px 10px 0px 0px;
     text-align: left;
     padding: 2px;
-
 }
 
 .pcppheader{
@@ -92,13 +91,14 @@
 
 width:100%;
 padding: 5px;
-background-color: bisque;
+background-color: #f5f3ee;
+border: 2px solid gray;
 border-radius:  0px 0px 10px 10px;
-border: 2px solid #e55b1c;
 color: black;
 font-family: 'Courier New', Courier, monospace;
 font-size: 1.2rem;
 font-weight: 600;
+min-height: 30vh ;
 max-height: 65vh;
 overflow-y: auto;
 justify-content: center;
@@ -129,7 +129,8 @@ align-items: center;
 }
 
 .gallery-select{
-    width: 70%;
+    width: 75%;
+    border-right: 3px solid gray;
 }
 
 .gallery-row select{
@@ -146,10 +147,10 @@ align-items: center;
 }
 
 .pgcactdelete{
-    width: 15%;
+    width: 10%;
     display: flex; 
     width: 100px;
-    justify-content: right;
+    justify-content: center;
     align-items: center;
     
 }
@@ -164,6 +165,7 @@ height: 50px;
 cursor: pointer;
 border-radius: 100px;
 margin-left: 40px;
+
 }
 
 .previewpage-container{
@@ -209,13 +211,14 @@ margin-left: 40px;
     justify-content: flex-start;
     border-right: none;
     border-bottom: 3px solid gray;
+    margin-bottom: 20px;
     
 }
 
 .gallery-layout select{
      width:100%;
      justify-content: flex-start;
-    
+     
 }
 
 
@@ -223,6 +226,8 @@ margin-left: 40px;
     display: flex;
     width:100%;
     justify-content: flex-start;
+    margin-bottom: 20px;
+    border-bottom: 3px solid gray;
    
 }
 

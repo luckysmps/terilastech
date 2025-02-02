@@ -3,6 +3,7 @@ import './App.css';
 import Header from "./components/Trls_Header";
 import Home from "./components/Trls_Services"
 import About from "./components/Trls_About"
+import MyApps from "./components/Trls_MyApps"
 import Contact from "./components/Trls_Contact"
 import Projects from "./components/Trls_Home"
 
@@ -19,8 +20,8 @@ function App() {
         return <Home />;
       case 'ai_hub':
         return <Home />;
-      case 'apps':
-        return <Home />;
+      case 'myapps':
+        return <MyApps />;
       case 'about':
         return <About />;
       case 'contact':
