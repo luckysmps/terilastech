@@ -166,7 +166,7 @@ margin-left: 40px;
     align-items: center;
     text-align: left;
     max-height: 65vh;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 
@@ -180,7 +180,12 @@ margin-left: 40px;
     gap: 20px;
   
 }
-
+.pgcactdelete{
+       display: flex; 
+     justify-content: center;
+    align-items: center;
+    
+}
 
 .gallery-row{
     
@@ -203,12 +208,7 @@ margin-left: 40px;
     flex-wrap: wrap;
     justify-content: flex-start;   
 }
-.buttonsdiv{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    overflow: hidden;
-}
+
 .buttonsdiv{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(50%, 2fr)); 

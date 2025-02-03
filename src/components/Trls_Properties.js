@@ -8,7 +8,7 @@ const PropertiesComponent = ({ onChange, label, dspname, onClose, initialPropert
   const [textColor_lb, setTextColor_lb] = useState(initialProperties.textColor_lb || '#000000');
   const [fontFamily_lb, setFontFamily_lb] = useState(initialProperties.fontFamily_lb || 'Arial');
   const [fontSize_lb, setFontSize_lb] = useState(initialProperties.fontSize_lb || '14px');
-  const [isBold_lb, setIsBold_lb] = useState(initialProperties.isBold_lb || true);
+  const [isBold_lb, setIsBold_lb] = useState(initialProperties.isBold_lb || false);
   const [isItalic_lb, setIsItalic_lb] = useState(initialProperties.isItalic_lb || false);
   const [isUnderlined_lb, setIsUnderlined_lb] = useState(initialProperties.isUnderlined_lb || false);
 
@@ -20,7 +20,8 @@ const PropertiesComponent = ({ onChange, label, dspname, onClose, initialPropert
   const [isItalic, setIsItalic] = useState(initialProperties.isItalic || false);
   const [isUnderlined, setIsUnderlined] = useState(initialProperties.isUnderlined || false);
 
-  const [isRequired, setIsRequired] = useState(initialProperties.isRequired || true);
+  const [isRequired, setIsRequired] = useState(initialProperties.isRequired || false);
+
 
   const controlLabels = {
     '1': 'SingleLine Text',

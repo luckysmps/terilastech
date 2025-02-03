@@ -42,15 +42,21 @@ const PageCreation = () => {
             ...row,
             properties: {
               ...row.properties,
-              [columnIndex]: updatedProperties,
+              [columnIndex]: {
+                ...row.properties[columnIndex], 
+                ...updatedProperties, 
+              },
             },
           };
+          
+
         }
         return row;
       })
-    );
-  };
 
+    );
+
+  };
   const handleCreate = () => {
     const dataToSave = rows.map((row) => ({
       id: row.id,
@@ -68,6 +74,7 @@ const PageCreation = () => {
 
   const handleClosePropertiesModal = () => {
     setIsModalOpen(false);
+    
   };
 
   return (
@@ -100,6 +107,9 @@ const PageCreation = () => {
               </div>
 
               <div className="gallery-select">
+                <>
+                
+                </>
                 <ColumnLayout
                   ddsev={row.dropdownValue}
                   columnIndex={rowIndex}

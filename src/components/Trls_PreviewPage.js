@@ -15,7 +15,9 @@ const PreviewPage = ({ rows, selectedColumnValues }) => {
   const [resetFlag, setResetFlag] = useState(false);
   const [validFields, setValidFields] = useState({});
 
+
   const handleChange = (displayName, value) => {
+    console.log(displayName)
     setFormData((prevData) => ({
       ...prevData,
       [displayName]: value,
@@ -29,13 +31,19 @@ const PreviewPage = ({ rows, selectedColumnValues }) => {
     }));
   };
 
+
+
+
+
   const handleSubmit = () => {
     const dataToExport = rows.map((row) => {
       const rowData = {};
       Object.keys(row.properties).forEach((columnIndex) => {
         const columnProperties = row.properties[columnIndex];
+     
         const displayName = columnProperties.disName_lb || `Row ${row.id}, Column ${parseInt(columnIndex) + 1}`;
         rowData[displayName] = formData[columnProperties.disName_lb] || '';
+        
       });
       return rowData;
     });
@@ -63,17 +71,24 @@ const PreviewPage = ({ rows, selectedColumnValues }) => {
     }
   }, [resetFlag]);
 
- 
-  const isFormDataEmpty = Object.values(formData).every(value => value === '' || value === null || value === undefined);
 
-const isSubmitDisabled = isFormDataEmpty || rows.some(row =>
-  Object.keys(row.properties).some((columnIndex) => {
-    const columnProperties = row.properties[columnIndex];
-    const displayName = columnProperties.disName_lb;
-    return !formData[displayName] || validFields[row.id * 10 + parseInt(columnIndex)] === false;
-  })
-);
+  const isSubmitDisabled =rows.some(row =>
+    Object.keys(row.properties).some((columnIndex) => {
+      const columnProperties = row.properties[columnIndex];
+      const displayName = columnProperties.disName_lb;
+      
+      if (!displayName) {
+        return true;
+      }
+  
+      const isRequired = columnProperties.isRequired;
+      const value = formData[displayName];
 
+      // If required and field is empty or invalid, disable submit button
+      return (isRequired && (!value || validFields[row.id * 10 + parseInt(columnIndex)] === false));
+    })
+  );
+  
 
   const getComponentForType = (type) => {
     const componentMap = {
@@ -112,6 +127,7 @@ const isSubmitDisabled = isFormDataEmpty || rows.some(row =>
                   return (
                     <div key={index}>
                       {Component ? (
+                        <>
                         <Component
                           cid={row.id * 10 + index}
                           {...columnProperties}
@@ -120,6 +136,7 @@ const isSubmitDisabled = isFormDataEmpty || rows.some(row =>
                           reset={resetFlag}
                           onValidityChange={(isValid) => handleValidityChange(row.id * 10 + index, isValid)}
                         />
+                        </>
                       ) : (
                         <div>Select a valid component</div>
                       )}
