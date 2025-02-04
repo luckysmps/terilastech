@@ -16,8 +16,8 @@ const PageCreation = () => {
     const newRow = { id: nextId, dropdownValue: '0', properties: {} };
     setRows([...rows, newRow]);
     setNextId(nextId + 1);
+ 
   };
-
   const handleColumnSelectChange = (rowId, columnIndex, selectedValue) => {
     setSelectedColumnValues(prevValues => ({
       ...prevValues,
@@ -35,8 +35,15 @@ const PageCreation = () => {
   };
 
   const handlePropertiesChange = (rowId, columnIndex, updatedProperties) => {
+ 
+    const errorMessageElement = document.getElementById('errorMessage'); 
+  
+    errorMessageElement.textContent=""
+  
+  
     setRows((prevRows) =>
       prevRows.map((row) => {
+        
         if (row.id === rowId) {
           return {
             ...row,
@@ -57,14 +64,28 @@ const PageCreation = () => {
     );
 
   };
+
+
+
   const handleCreate = () => {
+
+    const hasInvalidRow = rows.some(row => row.dropdownValue === "0" || row.properties.length === 0);
+    const errorMessageElement = document.getElementById('errorMessage'); 
+  if (hasInvalidRow) {
+    errorMessageElement.textContent="*Please make sure all control Type and Properties are selected*"
+    return; 
+  }
+
     const dataToSave = rows.map((row) => ({
       id: row.id,
       controlType: row.dropdownValue,
       properties: row.properties,
+     
     }));
     console.log(JSON.stringify(dataToSave, null, 2));
   };
+
+  const rowslength=rows.length>1?false:true
 
   const handleOpenPropertiesModal = (rowId, columnIndex) => {
     setCurrentRowId(rowId);
@@ -119,15 +140,18 @@ const PageCreation = () => {
               </div>
               <div className="gallery-delete">
                 <div className="pgcactdelete">
-                  <button onClick={() => handleRemoveRow(row.id)}></button>
+                  <button  disabled={rowslength} onClick={() => handleRemoveRow(row.id)}></button>
                 </div>
               </div>
             </div>
           ))}
         </div>
+        <div style={{display:'flex', justifyContent:'center'}}>
+        <p id="errorMessage" className='submiterror'></p>
+        </div>
         <div className="buttonsdiv">
           <button onClick={handleAddRow}>Add New Parameter</button>
-          <button onClick={handleCreate}>Create Project</button>
+          <button onClick={handleCreate}  >Create Project</button>
         </div>
       </div>
 

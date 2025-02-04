@@ -14,10 +14,8 @@ const PreviewPage = ({ rows, selectedColumnValues }) => {
   const [formData, setFormData] = useState({});
   const [resetFlag, setResetFlag] = useState(false);
   const [validFields, setValidFields] = useState({});
-
-
+  
   const handleChange = (displayName, value) => {
-    console.log(displayName)
     setFormData((prevData) => ({
       ...prevData,
       [displayName]: value,
@@ -57,12 +55,10 @@ const PreviewPage = ({ rows, selectedColumnValues }) => {
   };
   useEffect(() => {
     if (resetFlag) {
-      // Set formData and validFields to empty only once.
       setFormData({});
       setValidFields({});
       
-      // Use setTimeout to reset the flag after a short delay.
-      const timer = setTimeout(() => {
+    const timer = setTimeout(() => {
         setResetFlag(false);
       }, 0);
   
@@ -70,9 +66,9 @@ const PreviewPage = ({ rows, selectedColumnValues }) => {
       return () => clearTimeout(timer);
     }
   }, [resetFlag]);
-
-
-  const isSubmitDisabled =rows.some(row =>
+  const row = rows[0];
+  const formLength = Object.keys(row.properties).length; 
+  const isSubmitDisabled = formLength>0? rows.some(row =>
     Object.keys(row.properties).some((columnIndex) => {
       const columnProperties = row.properties[columnIndex];
       const displayName = columnProperties.disName_lb;
@@ -87,8 +83,8 @@ const PreviewPage = ({ rows, selectedColumnValues }) => {
       // If required and field is empty or invalid, disable submit button
       return (isRequired && (!value || validFields[row.id * 10 + parseInt(columnIndex)] === false));
     })
-  );
-  
+  ):true;
+
 
   const getComponentForType = (type) => {
     const componentMap = {
@@ -138,7 +134,7 @@ const PreviewPage = ({ rows, selectedColumnValues }) => {
                         />
                         </>
                       ) : (
-                        <div>Select a valid component</div>
+                        <div className='previewecontrolmsg'>Select a valid component</div>
                       )}
                     </div>
                   );

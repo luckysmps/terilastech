@@ -113,7 +113,7 @@ align-items: center;
     margin: 5px;
     padding: 5px;
     height: auto;
-    border-bottom: 4px double gray;
+    border-bottom: 4px double orange;
     width: auto;
 
 }
@@ -167,7 +167,11 @@ border-radius: 100px;
 margin-left: 40px;
 
 }
-
+.submiterror{
+   color: red;
+   font-size: small;
+   font-weight: bold; 
+}
 .previewpage-container{
     width: 30%;
     grid-gap: 10px; 
@@ -180,12 +184,20 @@ margin-left: 40px;
     justify-content: center;
     align-items: center;
     text-align: left;
+    min-height: 30vh ;
     max-height: 65vh;
     overflow-y: scroll;
 }
 
 
-
+.previewecontrolmsg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    font-size: 20px;
+    font-weight: 700;
+}
 @media (max-width: 768px) {
 
 .gallery-mainpage{
@@ -227,9 +239,12 @@ margin-left: 40px;
     width:100%;
     justify-content: flex-start;
     margin-bottom: 20px;
+    border-right: none;
     border-bottom: 3px solid gray;
    
 }
+
+
 
 .gallery-row{
     
@@ -290,6 +305,23 @@ margin-left: 40px;
         font-size: 12px;
         font-weight: 600;
         } 
+
+        .pgcactdelete{
+            width: 90%;
+            display: flex;
+           justify-content: center;
+           align-items: center;
+                      
+           }
+   
+
+        .pgcactdelete button{
+             width: 40px;
+            height: 40px;
+            cursor: pointer;
+            border-radius: 100px;
+                                 
+            }
     
     }
     

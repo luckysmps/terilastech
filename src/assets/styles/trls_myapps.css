@@ -28,7 +28,7 @@
   font-weight: bold;
   border-bottom: 3px solid black;
   z-index: 2;
-  margin-bottom: 5px;
+  padding: 10px;
 }
 
 .myapps-cardcontainer {
@@ -132,9 +132,32 @@
     border-radius: 10px;
     overflow-y: auto;
   }
+  .myapps-header {
+    font-size: 1.2em;
+    padding: 5px;
+   }
+  
   .myapps-card {
-    height: auto; 
+    width: 200px;
+    height: 200px;
+   }
+  
+  .myapps-title {
+    padding: 5px;
+    font-size: 15px;
+    
   }
+    
+  .myapps-image img {
+    width: 100%; 
+    height: 100%; 
+    object-fit:contain; 
+    object-position: center;
+    margin: 0;
+  }
+
+  
+
 }
 @media (max-width: 460px) {
   .myapps-container {
