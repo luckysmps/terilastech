@@ -23,6 +23,7 @@ const TextboxNumber = ({
   onChange, 
   reset,
   onValidityChange,
+  minLength,
 }) => {
   // Combine the label styles and the textbox styles
   const labelStyles = {
@@ -61,7 +62,7 @@ const TextboxNumber = ({
     setIpLen('');
   }, [reset]);
 
-  const newIsValid = isRequired && ipLen.length < 1 ? false : true;
+  const newIsValid = isRequired && ipLen.length <(minLength || 1) ? false : true;
 
   useEffect(() => {
     if (isValid !== newIsValid) {
@@ -81,7 +82,7 @@ const TextboxNumber = ({
         {disName_lb}
       </label>
       </div>
-            {isRequired && ipLen.length < 1 && <div className='asterisk'>*</div>}
+            {isRequired && ipLen.length < (minLength || 1) && <div className='asterisk'>*</div>}
 
     </div>
       <div className='valueclass'>
@@ -90,6 +91,7 @@ const TextboxNumber = ({
         style={textboxStyles}
         value={value}
         onChange={lengthvalidation}
+        minLength={minLength || 1}
      />
        
         </div>
@@ -121,6 +123,7 @@ TextboxNumber.propTypes = {
   onChange: PropTypes.func, 
   reset: PropTypes.bool,
   onValidityChange: PropTypes.func,
+  minLength: PropTypes.number
 };
 
 export default TextboxNumber;

@@ -1,20 +1,24 @@
 [
   {
     "title": "Task Management",
-    "image": "task.png"
+    "image": "task.png",
+    "component": "task_app"
   },
   {
     "title": "Time Management",
-    "image": "time.png"
+    "image": "time.png",
+    "component": "time_app"
   },
   {
     "title": "Data Management",
-      "image": "data.png"
+      "image": "data.png",
+       "component": "data_app"
    
   },
   {
     "title": "Form/Survay",
-     "image": "form.png"
+     "image": "form.png",
+     "component": "form_app"
    
   }
 ]

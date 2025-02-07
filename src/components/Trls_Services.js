@@ -15,7 +15,7 @@ const Trls_Service = () => {
       <h1>We Are Expertized In ...</h1>
       </div>
     <div className="services_services-container">
-      
+    
       {servicesData.map(({ title, color, image, details }, index) => (
         <div 
           key={index} 

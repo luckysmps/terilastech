@@ -1,0 +1,96 @@
+/* Sidebar container styling */
+.sidebarcontainer {
+  background-color: #E7E8D1; 
+  height: 80vh;
+  color: white;
+  font-family: Arial, sans-serif;
+  padding-top: 20px;
+  border-right: 4px double #73605B;
+}
+
+.mainlist ul {
+  list-style-type: none;
+  padding: 0;
+
+}
+
+.mainlist li {
+  padding: 10px;
+  font-size: 15px;
+}
+
+.mainlist a {
+  color: black;
+  font-weight: 700;
+  text-decoration: none;
+  display: block;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.mainlist a:hover {
+  background-color: #FF8C00; 
+  cursor: pointer;
+}
+
+.menu-item a {
+  font-weight: bold;
+}
+
+.navselected {
+  border-left: 5px solid #FF8C00;
+ }
+
+ .navspans{
+  margin-right: 5px;
+ }
+
+ .navspanleft{
+  margin-left: 5px;
+
+ }
+
+.submenu {
+  list-style-type: none;
+  border-radius: 4px;
+  opacity: 0;
+}
+
+.submenu.open {
+  max-height: 500px; 
+  opacity: 1;
+}
+
+.submenu li {
+  padding: 5px;
+  margin-left: 30px;
+  font-size: 13px;
+
+}
+
+.submenu a {
+  font-weight: 700;
+  text-decoration: none;
+  display: block;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.submenu a:hover {
+  background-color: #16a085;
+  cursor: pointer;
+}
+
+.subnavselected {
+  border-left: 5px solid #16a085;
+ }
+
+ @media (max-width: 768px) {
+ .sidebarcontainer {
+  border-bottom: 4px double #73605B;
+  height: auto;
+  color: white;
+
+
+}
+ }

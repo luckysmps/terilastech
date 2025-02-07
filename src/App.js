@@ -30,9 +30,9 @@ function App() {
         return <Home />;
     }
   };
- /* const hasSideContent = selectedPage === 'about' || selectedPage === 'home'; */
   
-  const hasSideContent = selectedPage === 'about';
+   /* const hasSideContent = selectedPage === 'about' || selectedPage === 'contact' || selectedPage === 'home' || selectedPage === 'myapps';*/
+ const hasSideContent = selectedPage === 'about' ; 
 
   return (
     <div>

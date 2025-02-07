@@ -33,7 +33,16 @@ const PropertiesComponent = ({ onChange, label, dspname, onClose, initialPropert
     '7': 'Star',
     '8': 'Search Select',
     '9': 'Multi Select',
+    '10':'TextboxEmail'
   };
+  const valuevalidation = controlLabels[label]==='Number' ? 1: controlLabels[label]==='TextboxEmail'?7:3;
+  const [minLength, setMinLength] = useState(initialProperties.minLength || valuevalidation);
+
+  const typevalidation = controlLabels[label]==='TextboxEmail' ? 'email': 'nonemail';
+
+  const [type, setType] = useState(initialProperties.isRequired || typevalidation);
+
+
 
   const [options, setOptions] = useState(() => {
     if (controlLabels[label] === 'Star') {
@@ -64,6 +73,8 @@ const PropertiesComponent = ({ onChange, label, dspname, onClose, initialPropert
         isUnderlined,
         options,
         isRequired,
+        minLength,
+        type,
       };
 
       if (JSON.stringify(newValues) !== JSON.stringify(previousValuesRef.current)) {
@@ -74,13 +85,16 @@ const PropertiesComponent = ({ onChange, label, dspname, onClose, initialPropert
   }, [
     bgColor, textColor, fontFamily, fontSize, isBold, isItalic, isUnderlined,
     bgColor_lb, disName_lb, fontFamily_lb, isBold_lb, isItalic_lb, fontSize_lb,
-    isUnderlined_lb, textColor_lb, options, isRequired, onChange,
+    isUnderlined_lb, textColor_lb, options, isRequired, minLength,type,onChange,
   ]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     let updatedValue = type === 'checkbox' ? checked : value;
 
+    if (name==='minLength'){
+      updatedValue=Number(value)
+    }
     switch (name) {
       case 'bgColor':
         setBgColor(updatedValue);
@@ -133,6 +147,12 @@ const PropertiesComponent = ({ onChange, label, dspname, onClose, initialPropert
       case 'isRequired':
         setIsRequired(updatedValue);
         break;
+        case 'minLength':
+          setMinLength(updatedValue);
+          break;
+          case 'type':
+            setType(updatedValue);
+            break;
       default:
         break;
     }
@@ -212,6 +232,30 @@ const PropertiesComponent = ({ onChange, label, dspname, onClose, initialPropert
           <input type="text" name="disName_lb" value='NA' onChange={handleChange} autoComplete='off' disabled />
           <input type="checkbox" name="isRequired" checked={isRequired} onChange={(e) => setIsRequired(e.target.checked)} />
         </div>
+
+        {(controlLabels[label] === 'SingleLine Text' || controlLabels[label] === 'Number' || controlLabels[label] === 'Multiline Text' || controlLabels[label] === 'TextboxEmail') && isRequired  && (
+        <div className="proptype">
+          <label>Min length?:</label>
+          <input type="text" name="minLength_lb" value='NA' onChange={handleChange} autoComplete='off' disabled />
+          <input type="text" name="minLength" value={minLength}  onChange={handleChange} />
+
+        </div>
+
+        
+        )}
+
+
+        {(controlLabels[label] === 'optional')   && (
+        <div className="proptype">
+          <label>Input type:</label>
+          <input type="text" name="minLength_lb" value='NA' onChange={handleChange} autoComplete='off' disabled />
+          <input type="text" name="minLength" value={type}  onChange={handleChange}  disabled/>
+
+        </div>
+
+        
+        )}
+
       </div>
     </div>
   );

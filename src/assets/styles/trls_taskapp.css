@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+.task-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: #f5f3ee;
+  height: auto;
+  margin: 0 auto;  
+  border: double 4px #e55b1c ;
+
+}
+
+.taskappleftnave{
+  width: 12%;
+}
+
+.taskappbody{
+  width: 88%;
+  padding: 5px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+ 
+.task-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  }
+  .taskappleftnave{
+    width: 100%;
+   
+  }
+
+}

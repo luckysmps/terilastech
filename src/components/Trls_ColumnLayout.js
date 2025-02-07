@@ -31,7 +31,8 @@ const ColumnLayout = ({
     { value: "6", label: "Select Choice" },
     { value: "7", label: "Star Rating" },
     { value: "8", label: "Search Select" },
-    { value: "9", label: "Multi Select" }
+    { value: "9", label: "Multi Select" },
+    { value: "10", label: "Email" }
   ];
 
   const columnCount = parseInt(ddsev, 10) || 0;

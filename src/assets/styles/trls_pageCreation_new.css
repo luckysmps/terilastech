@@ -10,12 +10,12 @@
     color: black;
     padding: 5px;
     margin: 5px;
-    background-color: beige;
-    border: 5px double black;
-    border-radius: 10px;
+    border: 2px solid black;
+    border-radius: 0px;
     display: flex;
     flex-direction: row;
     gap: 10px; 
+    height: 78vh;
 
 }
 .pcpheader{
@@ -48,15 +48,18 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(50%, 2fr)); 
     justify-content: flex-start;
+        align-items: center;
 }
 
 .buttonsdiv .add-row-button{
     justify-content: flex-start;
+  
     
 }
 
 .buttonsdiv .create-button{
     justify-content: flex-end;
+
     
 }
     .buttonsdiv  button{
@@ -72,6 +75,11 @@
     font-family: 'Times New Roman', Times, serif;
     font-size: 1.2rem;
     font-weight: 600;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+
     }  
     
     .buttonsdiv button:hover{
@@ -165,6 +173,7 @@ height: 50px;
 cursor: pointer;
 border-radius: 100px;
 margin-left: 40px;
+
 
 }
 .submiterror{

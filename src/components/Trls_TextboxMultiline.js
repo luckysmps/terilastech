@@ -23,6 +23,7 @@ const TextboxMultiline = ({
   onChange, 
   reset,
   onValidityChange,
+  minLength
 }) => {
   // Combine the label styles and the textbox styles
   const labelStyles = {
@@ -59,7 +60,7 @@ const TextboxMultiline = ({
     setIpLen('');
   }, [reset]);
 
-  const newIsValid = isRequired && ipLen.length < 3 ? false : true;
+  const newIsValid = isRequired && ipLen.length < (minLength || 3) ? false : true;
 
   useEffect(() => {
     if (isValid !== newIsValid) {
@@ -78,7 +79,7 @@ const TextboxMultiline = ({
             {disName_lb}
           </label>
           </div>
-          {isRequired && ipLen.length < 3 && <div className='asterisk'>*</div>}
+          {isRequired && ipLen.length <(minLength || 3) && <div className='asterisk'>*</div>}
 
         </div>
       <div className='valueclass'>
@@ -87,6 +88,7 @@ const TextboxMultiline = ({
         value={value}
         style={{...textboxStyles, height:'100pX', width:'100%'}}
         onChange={lengthvalidation}
+        minLength={minLength || 3}
      />
         
         </div>
@@ -118,6 +120,7 @@ TextboxMultiline.propTypes = {
   onChange: PropTypes.func, 
   reset: PropTypes.bool,
   onValidityChange: PropTypes.func,
+  minLength: PropTypes.number
 };
 
 export default TextboxMultiline;

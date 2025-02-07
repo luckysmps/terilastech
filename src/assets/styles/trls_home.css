@@ -9,14 +9,16 @@
   display: flex;
   flex-wrap: wrap ;
   gap: 0px;
-
+  top:120px;
+  
 }
 
 .corevalues{
+  position: relative;
   display: flex;
   text-align: center;
   margin-top: 20px;
-
+ 
 }
 
 .corevalues h1{ 

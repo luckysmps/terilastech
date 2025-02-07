@@ -26,8 +26,8 @@ const PageCreation = () => {
         [columnIndex]: selectedValue,
       },
     }));
-
-    handleOpenPropertiesModal(rowId, columnIndex);
+   
+    selectedValue>0 && handleOpenPropertiesModal(rowId, columnIndex) ;
   };
 
   const handleRemoveRow = (id) => {
@@ -35,7 +35,7 @@ const PageCreation = () => {
   };
 
   const handlePropertiesChange = (rowId, columnIndex, updatedProperties) => {
- 
+   
     const errorMessageElement = document.getElementById('errorMessage'); 
   
     errorMessageElement.textContent=""

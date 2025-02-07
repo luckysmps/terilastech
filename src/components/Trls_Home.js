@@ -50,10 +50,11 @@ const Trls_Home = () => {
 
   return (
     <div>
+  
+    <div className="home_service-cards-container">
     <div className="corevalues">
       <h1> Our Core Values</h1>
     </div>
-    <div className="home_service-cards-container">
       {corevalues.map(({ cv }, index) => (
         <animated.div
           key={index}

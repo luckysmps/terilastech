@@ -1,19 +1,63 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 .myapps-container {
-  position: fixed;
   background-color: #f5f3ee;
-  border: 10px double black;
+  border: 5px double gray;
   display: flex;
   flex-direction: column;
   justify-content:flex-start;
   align-items: center;
-  width: 70%;
-  height: 70%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 75vh;
+  max-height: 90%;
   border-radius: 10px;
   overflow-y: auto;
+  transition: none;
+  margin: 0 auto; 
+  overflow: hidden;
+  top:120px;
+  position: relative;
 }
+
+.myapps-component-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+}
+.myapps-component-container button{
+  display: flex;
+  flex-direction: column;
+  width: 40px;
+  align-items: center;
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 5px;
+  height: 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: gray;
+  color:white;
+  font-weight: bolder;
+
+}
+.myapps-component-container button:hover{
+    background-color: #e55b1c;
+  }
+
+.myapps-container.fullscreen {
+  width: 99% !important;
+  height: 85vh !important;
+  top: 100px;
+  left: 0px;
+  margin: 10px;
+  padding: 5px;
+}
+
+
 
 .myapps-header {
   width: 100%;
@@ -41,7 +85,6 @@
   align-items: center;
 }
 .myapps-card {
-  position: relative;
   background-color: #ffffff;
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -116,22 +159,26 @@
 
 
 @media (max-width: 768px) {
+
+
+
   .myapps-container {
-    position: fixed;
-    background-color: #f5f3ee;
-    border: 10px double black;
-    display: flex;
-    flex-direction: column;
-    justify-content:flex-start;
-    align-items: center;
-    width: 70%;
-    height: 70%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 10px;
+   top:120px;
+    position: relative;
     overflow-y: auto;
   }
+
+  .myapps-container.fullscreen {
+    width: 97% !important;
+    height: 85vh !important;
+    top: 120px;
+    left: 0;
+    transform: translate(0, 0);
+    margin: 10px;
+    padding: 10px;
+
+  }
+
   .myapps-header {
     font-size: 1.2em;
     padding: 5px;
@@ -156,10 +203,18 @@
     margin: 0;
   }
 
+
   
 
+  
 }
 @media (max-width: 460px) {
+  .myapps-container.fullscreen {
+    top:120px;
+    position: relative;
+    overflow-y: auto;
+  }
+
   .myapps-container {
     position: fixed;
     background-color: #f5f3ee;
@@ -175,6 +230,7 @@
     transform: translate(-50%, -50%);
     border-radius: 10px;
     overflow-y: auto;
+   
   }
   .myapps-card {
     height: auto; 

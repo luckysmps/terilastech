@@ -8,6 +8,7 @@ import SelectChoice from './Trls_SelectChoice';
 import SelectStar from './Trls_SelectStar';
 import SearchSelect from './Trls_SearchSelect';
 import MultiSelect from './Trls_MultiSelect';
+import TextboxEmail from './Trls_TextboxEmail'
 import '../assets/styles/trls_previewPage.css';
 
 const PreviewPage = ({ rows, selectedColumnValues }) => {
@@ -45,7 +46,6 @@ const PreviewPage = ({ rows, selectedColumnValues }) => {
       });
       return rowData;
     });
-
     alert(JSON.stringify(dataToExport, null, 2));
 
     // Reset form data and validity states
@@ -66,24 +66,50 @@ const PreviewPage = ({ rows, selectedColumnValues }) => {
       return () => clearTimeout(timer);
     }
   }, [resetFlag]);
-  const row = rows[0];
-  const formLength = Object.keys(row.properties).length; 
-  const isSubmitDisabled = formLength>0? rows.some(row =>
-    Object.keys(row.properties).some((columnIndex) => {
-      const columnProperties = row.properties[columnIndex];
-      const displayName = columnProperties.disName_lb;
-      
-      if (!displayName) {
-        return true;
-      }
   
-      const isRequired = columnProperties.isRequired;
-      const value = formData[displayName];
 
-      // If required and field is empty or invalid, disable submit button
-      return (isRequired && (!value || validFields[row.id * 10 + parseInt(columnIndex)] === false));
-    })
-  ):true;
+  const row = rows[0];
+const formLength = Object.keys(row.properties).length; 
+
+const isSubmitDisabled = formLength > 0
+  ? rows.some(row =>
+      Object.keys(row.properties).some(columnIndex => {
+        const columnProperties = row.properties[columnIndex];
+        const displayName = columnProperties.disName_lb;
+        const minLength = columnProperties.minLength;
+        const isRequired = columnProperties.isRequired;
+        const value = formData[displayName];
+
+        if (!displayName || (isRequired && (!value || value.trim() === ''))) {
+          return true; 
+        }
+
+        const isEmailField = columnProperties.type === 'email'; 
+
+        const validateEmail = (email) => {
+          const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+          return emailPattern.test(email);
+        };
+
+        const isFieldInvalidir = 
+          (isRequired && isEmailField && value && !validateEmail(value)) ||  
+          validFields[row.id * 10 + parseInt(columnIndex)] === false;
+
+        const isFieldInvalidinr = 
+          (isEmailField && value && !validateEmail(value)) ||  
+          validFields[row.id * 10 + parseInt(columnIndex)] === false;
+
+        const isMinLengthValid = (isRequired && minLength && typeof value !== 'undefined')
+          ? value.length >= minLength
+          : true;
+
+        return isFieldInvalidir || isFieldInvalidinr || !isMinLengthValid;
+      })
+    )
+  : true;
+
+
+
 
 
   const getComponentForType = (type) => {
@@ -97,6 +123,7 @@ const PreviewPage = ({ rows, selectedColumnValues }) => {
       '7': SelectStar,
       '8': SearchSelect,
       '9': MultiSelect,
+      '10':TextboxEmail
     };
     return componentMap[type] || null;
   };

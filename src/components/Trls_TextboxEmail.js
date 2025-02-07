@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import PropTypes from 'prop-types';
 import '../assets/styles/trls_control.css'
-const TextboxText = ({
+const TextboxEmail = ({
   cid,
   disName_lb,
   bgColor_lb,
@@ -24,6 +24,7 @@ const TextboxText = ({
   reset,
   onValidityChange,
   minLength,
+  type,
 }) => {
   // Combine the label styles and the textbox styles
   const labelStyles = {
@@ -55,13 +56,22 @@ const TextboxText = ({
       
     }
   }
-
+  
   useEffect(() => {
     if (reset) {
       setIpLen('');
     }
   }, [reset]);
-  const newIsValid = isRequired && ipLen.length < (minLength || 3) ? false : true;
+
+  const validateEmail = (email) => {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return emailPattern.test(email);
+  };
+
+  
+
+  const newIsValid = isRequired && ipLen.length >= (minLength || 7) && validateEmail(ipLen);
+
 
   useEffect(() => {
     if (isValid !== newIsValid) {
@@ -80,15 +90,15 @@ const TextboxText = ({
         {disName_lb}
       </label>
       </div>
-      {isRequired && ipLen.length < (minLength || 3) && <div className='asterisk'>*</div>}
-    </div>
+      {isRequired && (ipLen.length < (minLength || 7) || !validateEmail(ipLen)) && <div className='asterisk'>*</div>}
+      </div>
       <div className='valueclass'>
       <input
-        type="text"
+        type="email"
         style={textboxStyles}
         value={value}
         onChange={lengthvalidation}
-        minLength={minLength || 3}
+        minLength={minLength || 7}
      />
         
         </div>
@@ -98,7 +108,7 @@ const TextboxText = ({
 };
 
 
-TextboxText.propTypes = {
+TextboxEmail.propTypes = {
   cid: PropTypes.number,
   disName_lb: PropTypes.string,
   bgColor_lb: PropTypes.string,
@@ -122,6 +132,7 @@ TextboxText.propTypes = {
   reset: PropTypes.bool,
   onValidityChange: PropTypes.func,
   minLength: PropTypes.number,
+  type: PropTypes.bool,
 };
 
-export default TextboxText;
+export default TextboxEmail;
