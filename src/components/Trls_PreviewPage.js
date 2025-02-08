@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,useEffect  } from 'react';
 import TextboxText from './Trls_TextboxText';
 import TextboxNumber from './Trls_TextboxNumber';
 import TextboxMultiline from './Trls_TextboxMultiline';
@@ -10,8 +10,9 @@ import SearchSelect from './Trls_SearchSelect';
 import MultiSelect from './Trls_MultiSelect';
 import TextboxEmail from './Trls_TextboxEmail'
 import '../assets/styles/trls_previewPage.css';
+import axios from "axios";
 
-const PreviewPage = ({ rows, selectedColumnValues }) => {
+const PreviewPage = ({ rows, selectedColumnValues,textboxValue }) => {
   const [formData, setFormData] = useState({});
   const [resetFlag, setResetFlag] = useState(false);
   const [validFields, setValidFields] = useState({});
@@ -33,26 +34,61 @@ const PreviewPage = ({ rows, selectedColumnValues }) => {
 
 
 
-
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const dataToExport = rows.map((row) => {
       const rowData = {};
       Object.keys(row.properties).forEach((columnIndex) => {
         const columnProperties = row.properties[columnIndex];
-     
         const displayName = columnProperties.disName_lb || `Row ${row.id}, Column ${parseInt(columnIndex) + 1}`;
         rowData[displayName] = formData[columnProperties.disName_lb] || '';
-        
       });
       return rowData;
     });
-    alert(JSON.stringify(dataToExport, null, 2));
+
+    // Include projectName in the export data
+    const exportData = {
+      projectName: textboxValue,  // Adding the project name from the parent component
+      rows: dataToExport,  // Including the rows to be exported
+    };
+
+    try {
+      const response = await axios.post("http://127.0.0.1:5000/export", exportData, {
+        headers: {
+          'Content-Type': 'application/json',  
+        },
+        responseType: 'blob', 
+      });
+
+      const contentDisposition = response.headers['content-disposition'];
+      let filename = textboxValue +'.xlsx';
+      if (contentDisposition) {
+        const match = contentDisposition.match(/filename="(.+)"/);
+        if (match) {
+          filename = match[1];
+        }
+      }
+
+      const fileBlob = new Blob([response.data], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      });
+
+      const url = window.URL.createObjectURL(fileBlob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", filename);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (error) {
+      console.error("Error exporting to Excel:", error);
+    }
 
     // Reset form data and validity states
     setFormData({});
     setValidFields({});
     setResetFlag(true);
   };
+
   useEffect(() => {
     if (resetFlag) {
       setFormData({});

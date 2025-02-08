@@ -4,7 +4,7 @@ import PreviewPage from './Trls_PreviewPage';
 import ColumnLayout from './Trls_ColumnLayout';
 import Properties from '../components/Trls_Properties';
 
-const PageCreation = () => {
+const PageCreation = ({textboxValue} ) => {
   const [rows, setRows] = useState([{ id: 1, dropdownValue: '0', properties: {} }]);
   const [nextId, setNextId] = useState(2);
   const [selectedColumnValues, setSelectedColumnValues] = useState({});
@@ -12,7 +12,8 @@ const PageCreation = () => {
   const [currentRowId, setCurrentRowId] = useState(null);
   const [currentColumnIndex, setCurrentColumnIndex] = useState(null);
 
-  const handleAddRow = () => {
+
+ const handleAddRow = () => {
     const newRow = { id: nextId, dropdownValue: '0', properties: {} };
     setRows([...rows, newRow]);
     setNextId(nextId + 1);
@@ -80,6 +81,7 @@ const PageCreation = () => {
       id: row.id,
       controlType: row.dropdownValue,
       properties: row.properties,
+      ProjectName: textboxValue
      
     }));
     console.log(JSON.stringify(dataToSave, null, 2));
@@ -101,7 +103,8 @@ const PageCreation = () => {
   return (
     <div className="gallery-mainpage">
       <div className="main-container">
-        <div className="pcpheader">Project Creation Page</div>
+        <div className="pcpheader">Create Rubric</div>
+
         <div className="gallery-container">
           {rows.map((row, rowIndex) => (
             <div key={row.id} className="gallery-row">
@@ -158,7 +161,7 @@ const PageCreation = () => {
       <div className="previewpage-container">
         <div className="pcppheader">Preview</div>
         <div className='previewpage'>
-        <PreviewPage rows={rows} selectedColumnValues={selectedColumnValues}
+        <PreviewPage rows={rows} selectedColumnValues={selectedColumnValues}  textboxValue={textboxValue}
         onSubmit={handleCreate} 
         />
         </div>

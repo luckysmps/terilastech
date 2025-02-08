@@ -42,8 +42,8 @@ html, body {
   background-color: gray;
   color:white;
   font-weight: bolder;
-
 }
+
 .myapps-component-container button:hover{
     background-color: #e55b1c;
   }
@@ -150,6 +150,7 @@ html, body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  text-align: center;
 }
 
 .myapps_start_button:hover {

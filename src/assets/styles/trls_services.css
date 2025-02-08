@@ -100,12 +100,14 @@
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.2rem;
     width: 100%;
+    text-align: center;
+    font-weight: 700;
 }
 
 .services_contact-button:hover {
-    background-color: black;
+    background-color: gray;
 }
 
 /* Shine effect on page load (top-right and bottom-left borders) */

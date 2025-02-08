@@ -132,7 +132,7 @@ TextboxEmail.propTypes = {
   reset: PropTypes.bool,
   onValidityChange: PropTypes.func,
   minLength: PropTypes.number,
-  type: PropTypes.bool,
+  type: PropTypes.string,
 };
 
 export default TextboxEmail;
